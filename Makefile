@@ -7,5 +7,6 @@ BARE = -static -nostdlib -nostartfiles
 
 %.elf: %.s
 	riscv64-unknown-elf-gcc $< -o $@ ${LINK} ${BARE}
+
 clean:
-	rm -rf *.elf
+	rm -rf *.elf programs/**/*.elf
