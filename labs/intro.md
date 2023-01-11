@@ -32,25 +32,30 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 
 ## CVA6 Questions
 
-1. Attach the block diagram of CVA6 provided in the core's documentation.
+1. Attach the block diagram of CVA6 provided in the [core's documentation](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/).
 2. Skim the [CVA6 user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/) and give a one sentence summary for each of the 6 pipeline stages.
 3. Which stages are in the "frontend", and which are in the "backend"?
 4. Expand the following acronyms: IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, LSU, PTW, DTLB, ALU, FPU, AXI, CVA6, APU.
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
-6. What is AXI and where is it primarily used?
+6. What is AXI and what is it primarily used for in CVA6?
 
 ## ELF Questions
 
-1. What is an ELF file and where are they used? What is the difference between segments and sections?
-2. Compile [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please provide a screenshot.
-3. Write a `.s` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide both the `.s` file and the `.elf` file in your submission.)
-4. Write a `.c` file that contains a `for` loop with iteration count of at least 5. Compile it to an ELF file. (Provide both the `.c` file and the `.elf` file in your submission.)
+1. What is an ELF file and where are they used? (Not specific to CVA6)
+2. What is the difference between segments and sections?
+3. Compile [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please also provide a screenshot.
+4. Write a `.s` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide both the `.s` file and the `.elf` file in your submission.)
+5. Write a `.c` file that contains a `for` loop with iteration count of at least 5. Compile it to an ELF file. (Provide both the `.c` file and the `.elf` file in your submission.)
 
 ## Simulation Questions
 
-1. Give the hierarchical path of the PC in the instruction decode stage.
-2. Give the hierarchical path of the ALU output.
-3. Give the hierarchical path of the instruction in the execute stage.
-4. Simulate [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and give the time and a waveform screenshot of the `add` instruction occurring in the ALU.
-5. Simulate the `.s` file you wrote, and provide the timestamp and a waveform screenshot at: a taken branch, a store to memory, and a register file write, and a compressed instruction decoded.
-6. Simulate the `.c` file you wrote, and provide the timestamp and a waveform screenshot at the `for` loop beginning and end.
+Refer to the [Getting Started Guide](../guides/getting-started.md) if you need help setting up the required tools for simulation.
+
+Also, when providing screenshots of waveforms, please include all signals you decide are relevant to demonstrate the event. Improper justification will result in a lower score.
+
+1. Give the hierarchical path and GitHub permalink of the declaration of the PC in the instruction decode stage.
+2. Give the hierarchical path and GitHub permalink of the declaration of the ALU output.
+3. Give the hierarchical path and GitHub permalink of the declaration of the instruction in the execute stage.
+4. Simulate [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and give the time and a waveform screenshot of the `add` instruction occurring in the ALU. Provide justification.
+5. Simulate the `.s` file you wrote, and provide the timestamp and a waveform screenshot at: a taken branch, a store to memory, a register file write, and a decode of a compressed instruction. Provide justification.
+6. Simulate the `.c` file you wrote, and provide the timestamp and a waveform screenshot at the `for` loop beginning and end. Provide justification.
