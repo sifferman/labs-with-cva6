@@ -35,7 +35,7 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 1. Attach the block diagram of CVA6 provided in the [core's documentation](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/).
 2. Skim the [CVA6 user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/) and give a one sentence summary for each of the 6 pipeline stages.
 3. Which stages are in the "frontend", and which are in the "backend"?
-4. Expand the following acronyms: IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, LSU, PTW, DTLB, ALU, FPU, AXI, CVA6, APU.
+4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU.
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
 6. What is AXI and what is it primarily used for in CVA6?
 
