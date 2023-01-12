@@ -27,21 +27,29 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 ## RISC-V Questions
 
 1. Provide a link to the latest RISC-V ISA Manual.
-2. What are the 6 instruction formats of RISC-V? Give a one-to-three word description of each.
-3. What is a compressed instruction and what are they used for?
+github.com/riscv/riscv-isa-manual
+3. What are the 6 instruction formats of RISC-V? Give a one-to-three word description of each.
+
+5. What is a compressed instruction and what are they used for?
 
 ## CVA6 Questions
 
 1. Attach the block diagram of CVA6 provided in the [core's documentation](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/).
+
 2. Skim the [CVA6 user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/) and give a one sentence summary for each of the 6 pipeline stages.
+
 3. Which stages are in the "frontend", and which are in the "backend"?
+
 4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU.
+CVA6 - , OoO - Out of Order, APU - application processing unit, 
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
+Core apu is where the applications and testing is done, where as the core is where the architecture actually is.
 6. What is AXI and what is it primarily used for in CVA6?
 
 ## ELF Questions
 
 1. What is an ELF file and where are they used? (Not specific to CVA6)
+A file that describes the program memory and stores all the memory of the file.
 2. What is the difference between segments and sections?
 3. Compile [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please also provide a screenshot.
 4. Write a `.s` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide both the `.s` file and the `.elf` file in your submission.)
