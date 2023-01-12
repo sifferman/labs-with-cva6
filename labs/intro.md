@@ -23,6 +23,7 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 4. What is a SystemVerilog package, and how do you reference its contents in another file? Provide a GitHub link to `ariane_pkg.sv` and a permalink to an instance where `ariane_pkg` is imported and used in another file.
 5. What is a struct, and how do you access struct members? Provide a GitHub link to a struct definition in CVA6 and a permalink to where a member of that struct is used.
 6. What are block names? Provide a GitHub permalink to an instance of a block name in CVA6.
+7. What is DPI and what is it used for? Provide a GitHub permalink to a Verilog file that calls a DPI function, and provide a GitHub permalink to where that function is implemented.
 
 ## RISC-V Questions
 
@@ -38,7 +39,6 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU, DPI.
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
 6. What is AXI and what is it primarily used for in CVA6?
-7. What is DPI and what is it used for? Provide a GitHub permalink to a Verilog file that calls a DPI function, and provide a GitHub permalink to where that function is implemented.
 
 ## ELF Questions
 
