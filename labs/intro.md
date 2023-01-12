@@ -1,7 +1,7 @@
 
 # Introduction to CVA6 Lab
 
-This lab will help you become acquainted with the CVA6 core. First, you will need to read through and follow along with the [Getting Started Guide](../guides/getting-started.md). If you are having difficulties with the tool setup, please first complete the questons that do not require any setup.
+This lab will help you become acquainted with the CVA6 core. First, you will need to read through and follow along with the [Getting Started Guide](../guides/getting-started.md). If you are having difficulties with the tool setup, please first complete the questions that do not require any setup.
 
 ## GitHub Questions
 
@@ -35,9 +35,10 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 1. Attach the block diagram of CVA6 provided in the [core's documentation](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/).
 2. Skim the [CVA6 user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/) and give a one sentence summary for each of the 6 pipeline stages.
 3. Which stages are in the "frontend", and which are in the "backend"?
-4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU.
+4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU, DPI.
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
 6. What is AXI and what is it primarily used for in CVA6?
+7. What is DPI and what is it used for? Provide a GitHub permalink to a Verilog file that calls a DPI function, and provide a GitHub permalink to where that function is implemented.
 
 ## ELF Questions
 
