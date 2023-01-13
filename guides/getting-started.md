@@ -26,13 +26,33 @@ All necessary tools have been installed to linux.engr.ucsb.edu. Therefore we rec
 
 1. Set `$RISCV` to wherever you want the tools to be installed to. i.e. `export RISCV=~/riscv-tools`
 2. Run [`./cva6/ci/setup.sh`](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh). (If you get an error, you may need to rerun parts of the script manually).
-3. In ["./setup.sh"](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh), change the `$RISCV` initialization to whatever you chose for step 1.
+3. Install the [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build). You can do this by un-taring the latest release to a `"~/Utils/oss-cad-suite"` directory.
+4. Add the following to your `"~/.bashrc"`, and replace the values of the 3 environment variables:
+
+```bash
+# ECE 154B local machine ~/.bashrc additions
+# Author: Ethan Sifferman <ethan@sifferman.dev>
+# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave
+export RISCV_ROOT=<REPLACE THIS WITH YOUR RISCV ROOT>
+export VERILATOR_ROOT=<REPLACE THIS WITH YOUR VERILATOR 4.110 ROOT>
+export OSS_CAD_SUITE=<REPLACE THIS WITH YOUR OSS CAD SUITE ROOT>
+export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:$OSS_CAD_SUITE/bin
+# end ECE 154B
+```
 
 ### linux.engr.ucsb.edu Tool Setup
 
-1. Set `$RISCV` to `/ece/riscv` using `export RISCV=/ece/riscv`.
-2. **TODO: Add thigs to `$PATH`**
-3. In [`"./setup.sh"`](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh), ensure `$RISCV` is set to `/ece/riscv`.
+Add the following to your `"~/.bashrc"`:
+
+```bash
+# ECE 154B ~/.bashrc additions
+# Author: Ethan Sifferman <ethan@sifferman.dev>
+# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave
+export RISCV_ROOT=/ece/riscv
+export VERILATOR_ROOT=/ece/verilator-4.110
+export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:/ece/oss-cad-suite/bin
+# end ECE 154B
+```
 
 ## Regular Setup
 
@@ -49,7 +69,7 @@ You can see example programs in [`"./programs/examples"`](https://github.com/sif
 ### Running the Simulation
 
 1. `cd cva6`
-2. `make verilate DEBUG=1`
+2. `make verilate DEBUG=1 TRACE_FAST=1`
 3. `./work-ver/Variane_testharness -v dump.vcd <PATH TO ELF>`
 4. To view the waves, run `gtkwave dump.vcd`. (This should probably be done in another terminal to not interfere with running more simulations.)
 5. Navigate to **TOP.ariane_testharness.i_ariane.i_cva6** to see all the logic for the core.
