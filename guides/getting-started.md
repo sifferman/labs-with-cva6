@@ -24,7 +24,7 @@ All necessary tools have been installed to linux.engr.ucsb.edu. Therefore we rec
 
 ### Local Tool Setup
 
-1. Set `$RISCV` to wherever you want the tools to be installed to. i.e. `export RISCV=~/riscv-tools`
+1. Set `$RISCV` to wherever you want the tools to be installed to. i.e. run `RISCV=~/riscv-tools`
 2. Run [`./cva6/ci/setup.sh`](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh). (If you get an error, you may need to rerun parts of the script manually).
 3. Install the [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build). You can do this by un-taring the latest release to a `"~/Utils/oss-cad-suite"` directory.
 4. Add the following to your `"~/.bashrc"`, and replace the values of the 3 environment variables:
@@ -45,7 +45,7 @@ export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:$OSS_CAD_SUITE/bin
 Add the following to your `"~/.bashrc"`:
 
 ```bash
-# ECE 154B ~/.bashrc additions
+# ECE 154B linux.engr ~/.bashrc additions
 # Author: Ethan Sifferman <ethan@sifferman.dev>
 # Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave
 export RISCV_ROOT=/ece/riscv
@@ -56,7 +56,7 @@ export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:/ece/oss-cad-suite/bin
 
 ## Regular Setup
 
-After installing all the tools, any time you open a new terminal, you will need to run [`./setup.sh`](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh).
+Before starting CVA6 simulations on a new terminal session, ensure proper environment configuration by running `source setup.sh`.
 
 ## Running Simulations
 
@@ -64,13 +64,14 @@ After setup is completed, you should be able to run CVA6 simulations. The primar
 
 ### Building an ELF
 
-You can see example programs in [`"./programs/examples"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples). You can compile the program to an ELF file using [`"./Makefile"`](https://github.com/sifferman/labs-with-cva6/blob/main/Makefile). Usage is `make <PATH TO PROGRAM>.elf`, i.e. `make programs/examples/asm.elf`. (Be sure that you've run [`./setup.sh`](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh) first.)
+You can see example programs in [`"./programs/examples"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples). You can compile the program to an ELF file using [`"./Makefile"`](https://github.com/sifferman/labs-with-cva6/blob/main/Makefile). Usage is `make <PATH TO PROGRAM>.elf`, i.e. `make programs/examples/asm.elf`. (Be sure that you've run `source setup.sh` first.)
 
 ### Running the Simulation
 
-1. `cd cva6`
-2. `make verilate DEBUG=1 TRACE_FAST=1`
-3. `./work-ver/Variane_testharness -v dump.vcd <PATH TO ELF>`
-4. To view the waves, run `gtkwave dump.vcd`. (This should probably be done in another terminal to not interfere with running more simulations.)
-5. Navigate to **TOP.ariane_testharness.i_ariane.i_cva6** to see all the logic for the core.
-6. Once you've selected all the waves necessary for your lab, be sure to save your workspace using "File->Write Save File", so next time you don't have to reopen all necessary waves again.
+1. Ensure you've run `source setup.sh`
+2. `cd cva6`
+3. `make verilate DEBUG=1 TRACE_FAST=1`
+4. `./work-ver/Variane_testharness -v dump.vcd <PATH TO ELF>`
+5. To view the waves, run `gtkwave dump.vcd`. (This should probably be done in another terminal to not interfere with running more simulations.)
+6. Navigate to **TOP.ariane_testharness.i_ariane.i_cva6** to see all the logic for the core.
+7. Once you've selected all the waves necessary for your lab, be sure to save your workspace using "File->Write Save File", so next time you don't have to reopen all necessary waves again.
