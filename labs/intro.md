@@ -10,14 +10,19 @@ We are assuming that you have some familiarity with Git and GitHub already. If y
 Next, refer to this guide as needed: [Creating a permanent link to a code snippet](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-a-permanent-link-to-a-code-snippet).
 
 1. What is a Git commit? What is the hash of the commit that first added [this file](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro.md) to this repository?
+
 A git commit is an edit made to a file in git that contains changes made to a file(s) at a certain instance. Hash is a766fc11f700cb1ad442a24339613945cd15f9e5.
 2. Using [`"./labs/intro/git-example.txt"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro/git-example.txt), provide a link (URL) to the line that describes who wrote that file.
+
 https://github.com/sifferman/labs-with-cva6/blob/0b79133fa90623cf1936d022f0483c863f12db65/labs/intro/git-example.txt#L3
 3. Using that same file, open its initial commit and create a permalink to the line that describes who wrote that file.
+
 https://github.com/sifferman/labs-with-cva6/blob/a766fc11f700cb1ad442a24339613945cd15f9e5/labs/intro/git-example.txt#L2
 4. Why should you always use permalinks when sending links to lines of code via GitHub?
+
 This is because it makes reviewing code much faster and more streamlined instead of having to dig for a line.
 5. What is a Git submodule, and what are they used for? What is the hash of the cva6 submodule that this repository uses?
+
 A git submodule is a part of one repo that is a refernce to a specific commit of another repo.
 
 ## SystemVerilog Questions
