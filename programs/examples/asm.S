@@ -1,9 +1,7 @@
 /*
- * File: asm.s
+ * File: asm.S
  * Description: Example of how to format a RISC-V assembly file to be read by CVA6.
  */
-
-#include "program_stop.h"
 
         .text
 # Text segment
