@@ -10,19 +10,37 @@ We are assuming that you have some familiarity with Git and GitHub already. If y
 Next, refer to this guide as needed: [Creating a permanent link to a code snippet](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-a-permanent-link-to-a-code-snippet).
 
 1. What is a Git commit? What is the hash of the commit that first added [this file](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro.md) to this repository?
+A git commit is an edit made to a file in git that contains changes made to a file(s) at a certain instance. Hash is a766fc11f700cb1ad442a24339613945cd15f9e5.
 2. Using [`"./labs/intro/git-example.txt"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro/git-example.txt), provide a link (URL) to the line that describes who wrote that file.
+https://github.com/sifferman/labs-with-cva6/blob/0b79133fa90623cf1936d022f0483c863f12db65/labs/intro/git-example.txt#L3
 3. Using that same file, open its initial commit and create a permalink to the line that describes who wrote that file.
+https://github.com/sifferman/labs-with-cva6/blob/a766fc11f700cb1ad442a24339613945cd15f9e5/labs/intro/git-example.txt#L2
 4. Why should you always use permalinks when sending links to lines of code via GitHub?
+This is because it makes reviewing code much faster and more streamlined instead of having to dig for a line.
 5. What is a Git submodule, and what are they used for? What is the hash of the cva6 submodule that this repository uses?
+A git submodule is a part of one repo that is a refernce to a specific commit of another repo.
 
 ## SystemVerilog Questions
 
 1. Provide a link to the IEEE 1800-2017 SystemVerilog standard. (You will need the UCSB network to access <https://ieeexplore.ieee.org/Xplore/home.jsp>)
+https://ieeexplore.ieee.org/document/8299595
 2. In the keyword `always_comb`, what does "comb" refer to? What is its Verilog equivalent? Provide a GitHub permalink to an instance of `always_comb` in CVA6.
+Comb refers to combinational logic, with its verilog equivalent being ***an always @ statement followed with the logic.*** 
+https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv#L167
 3. In the keyword `always_ff`, what does "ff" refer to? What is its Verilog equivalent? Provide a GitHub permalink to an instance of `always_ff` in CVA6.
+The ff refers to a flip flop, and its verilog equivalent  being ***an always statements followed with a flip flop and associated logic***
+https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv#L355
 4. What is a SystemVerilog package, and how do you reference its contents in another file? Provide a GitHub link to `ariane_pkg.sv` and a permalink to an instance where `ariane_pkg` is imported and used in another file.
+A SystemVerilog package is a package that is imported to add functionality and additional mechanisms to a a program. 
+Package: https://github.com/openhwgroup/cva6/blob/7c92b68b922f05f2898a48f0a160f359ba24d805/core/include/ariane_pkg.sv
+Useage in another file: https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv#L18
 5. What is a struct, and how do you access struct members? Provide a GitHub link to a struct definition in CVA6 and a permalink to where a member of that struct is used.
+A struct is a functionality that allows us to concatenate various variables and characteristics into a single object. 
+https://github.com/openhwgroup/cva6/blob/7c92b68b922f05f2898a48f0a160f359ba24d805/core/include/ariane_pkg.sv#L364
+https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv#L56
 6. What are block names? Provide a GitHub permalink to an instance of a block name in CVA6.
+Block names are blocks that are named by adding a name after keywords begin or fork. 
+https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv#L71
 
 ## RISC-V Questions
 
