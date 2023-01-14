@@ -3,6 +3,8 @@
  * Description: Example of how to format a C file to be read by CVA6.
  */
 
+#include "program_stop.h"
+
 const char str[] = "Hello, world!";
 
 int f(int x, int y) {
@@ -10,7 +12,7 @@ int f(int x, int y) {
 }
 
 // entry point
-int _start(void) {
+void _start(void) {
     int result = f(2022, 2023);
-    return 0;
+    program_stop(0);
 }

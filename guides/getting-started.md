@@ -64,14 +64,14 @@ After setup is completed, you should be able to run CVA6 simulations. The primar
 
 ### Building an ELF
 
-You can see example programs in [`"./programs/examples"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples). You can compile the program to an ELF file using [`"./Makefile"`](https://github.com/sifferman/labs-with-cva6/blob/main/Makefile). Usage is `make <PATH TO PROGRAM>.elf`, i.e. `make programs/examples/asm.elf`. (Be sure that you've run `source setup.sh` first.)
+You can see example programs in [`"./programs/examples"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples). You can compile the program to an ELF file using the [`"./programs/Makefile"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/Makefile). To use the Makefile, run `cd programs`, then run `make <PATH TO PROGRAM>.elf`, i.e. `make examples/asm.elf`. (Be sure that you've run `source setup.sh` first.)
 
 ### Running the Simulation
 
 1. Ensure you've run `source setup.sh`
 2. `cd cva6`
 3. `make verilate DEBUG=1 TRACE_FAST=1`
-4. `./work-ver/Variane_testharness -v dump.vcd <PATH TO ELF>`
+4. `./work-ver/Variane_testharness -v dump.vcd <PATH TO ELF>` (You can change the vcd filename to whatever you want.)
 5. To view the waves, run `gtkwave dump.vcd`. (This should probably be done in another terminal to not interfere with running more simulations.)
 6. Navigate to **TOP.ariane_testharness.i_ariane.i_cva6** to see all the logic for the core.
 7. Once you've selected all the waves necessary for your lab, be sure to save your workspace using "File->Write Save File", so next time you don't have to reopen all necessary waves again.
