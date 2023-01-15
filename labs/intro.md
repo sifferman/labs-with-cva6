@@ -50,10 +50,19 @@ https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6
 ## RISC-V Questions
 
 1. Provide a link to the latest RISC-V ISA Manual.
-github.com/riscv/riscv-isa-manual
+https://github.com/riscv/riscv-isa-manual
 3. What are the 6 instruction formats of RISC-V? Give a one-to-three word description of each.
+    - R-Format: instructions using 3 register inputs. (add, xor, mul -arithmetic/logical ops)
+    - I-Format: instructions with immediates, loads. (addi, lw, jalr, slli)
+    - S-Format: store instructions. (sw, sb)
+    - U-Format: instructions with upper immediates. (lui, auipc -upper immediate is 20-bits)
+    - SB-Format: branch instructions. (beq, bge)
+    - UJ-Format: jump instructions. (jal, j)
 
 5. What is a compressed instruction and what are they used for?
+In computing, compressed instructions are a compact variation of the instruction set of a microprocessor aimed at increasing the code density of executable programs. They are a solution to the usual increased application binary sizes found on RISC architectures. They are designed to reduce static and dynamic code size by substituting common instructions with shorter 16-bit instruction encoding.
+Link to the RISC-V Compressed Instruction Set Manual Version 1.7:
+https://riscv.org/wp-content/uploads/2015/05/riscv-compressed-spec-v1.7.pdf
 
 ## CVA6 Questions
 
