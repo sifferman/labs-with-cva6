@@ -12,8 +12,9 @@ _start: # entry point
         li      t1, 2023;
         add     t2, t0, t1;
 
-        li      a0, 0; # set exit value to 0
-        j program_stop
+        li      a0, 0;  # set exit value to 0
+        li      a7, 93; # set syscall to `exit`
+        ecall;
 
         .data
 # Data segment
