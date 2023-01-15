@@ -1,3 +1,8 @@
+#
+# File: setup.sh
+# Description: Script to set up environment variables for CVA6 simulation and build flow.
+# Usage: Using bash, source this file while being in the root folder of "labs-with-cva6".
+#
 
 # Adapted from
 # https://github.com/PrincetonUniversity/openpiton/blob/3cc7bf4d3d1ee2f8e18c33eda6c136a57222806b/piton/ariane_setup.sh
