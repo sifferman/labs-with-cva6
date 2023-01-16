@@ -76,36 +76,38 @@ https://riscv.org/wp-content/uploads/2015/05/riscv-compressed-spec-v1.7.pdf
 #TODO
 
 4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU.
-    - RISC-V:
+    - RISC-V: "Reducded Instruction Set Computer - Five"
     - CVA6: 
-    - IF:
-    - ID:
+    - IF: "Instruction Fetch"
+    - ID: "Instruction Decode"
     - EX:
     - I\$:
     - D\$:
-    - FIFO:
-    - TLB:
-    - ITLB:
-    - CSR:
+    - FIFO: "First In First Out"
+    - TLB: "Translation lookaside buffer"
+    - ITLB: 
+    - CSR: "Control and Status Register"
     - BHT:
-    - RAS:
-    - BTB:
+    - RAS: "Return-address stack"
+    - BTB: 
     - MMU:
     - EPC:
-    - MTVEC:
-    - LSU:
+    - MTVEC: 
+    - LSU: "Load Store Unit"
     - PTW:
     - DTLB:
-    - ALU:
-    - FPU:
-    - OoO: Out of order.
-    - WB:
+    - ALU: "Arithmetic/Logic Unit"
+    - FPU: "Floating Point Unit"
+    - OoO: "Out of Order"
+    - WB: "Write Back of instruction results"
     - AXI:
     - APU: application processing unit.
-    
+
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
 Core apu is where the applications and testing is done, where as the core is where the architecture actually is.
+
 6. What is AXI and what is it primarily used for in CVA6?
+#TODO
 
 ## ELF Questions
 
