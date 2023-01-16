@@ -67,13 +67,42 @@ https://riscv.org/wp-content/uploads/2015/05/riscv-compressed-spec-v1.7.pdf
 ## CVA6 Questions
 
 1. Attach the block diagram of CVA6 provided in the [core's documentation](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/).
+#TODO
 
 2. Skim the [CVA6 user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/) and give a one sentence summary for each of the 6 pipeline stages.
+#TODO
 
 3. Which stages are in the "frontend", and which are in the "backend"?
+#TODO
 
 4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU.
-CVA6 - , OoO - Out of Order, APU - application processing unit, 
+    - RISC-V:
+    - CVA6: 
+    - IF:
+    - ID:
+    - EX:
+    - I\$:
+    - D\$:
+    - FIFO:
+    - TLB:
+    - ITLB:
+    - CSR:
+    - BHT:
+    - RAS:
+    - BTB:
+    - MMU:
+    - EPC:
+    - MTVEC:
+    - LSU:
+    - PTW:
+    - DTLB:
+    - ALU:
+    - FPU:
+    - OoO: Out of order.
+    - WB:
+    - AXI:
+    - APU: application processing unit.
+    
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
 Core apu is where the applications and testing is done, where as the core is where the architecture actually is.
 6. What is AXI and what is it primarily used for in CVA6?
