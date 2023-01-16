@@ -4,7 +4,7 @@
 #
 
 AUX = -T aux/link.ld -I aux
-BARE = -static -nostdlib -nostartfiles -fno-common
+BARE = -static -nostdlib -nostartfiles -fno-common -O0
 
 all: clean examples/asm.elf examples/c.elf
 
@@ -22,4 +22,4 @@ clean:
 
 # Create .S from .c
 %.S: %.c
-	riscv64-unknown-elf-gcc -S -fverbose-asm -O0 ${BARE} $< -o $@ ${AUX}
+	riscv64-unknown-elf-gcc -S -fverbose-asm ${BARE} $< -o $@ ${AUX}
