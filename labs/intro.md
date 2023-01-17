@@ -12,15 +12,19 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 1. What is a Git commit? What is the hash of the commit that first added [this file](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro.md) to this repository?
 
 A git commit is an edit made to a file in git that contains changes made to a file(s) at a certain instance. Hash is a766fc11f700cb1ad442a24339613945cd15f9e5.
+
 2. Using [`"./labs/intro/git-example.txt"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro/git-example.txt), provide a link (URL) to the line that describes who wrote that file.
 
 https://github.com/sifferman/labs-with-cva6/blob/0b79133fa90623cf1936d022f0483c863f12db65/labs/intro/git-example.txt#L3
+
 3. Using that same file, open its initial commit and create a permalink to the line that describes who wrote that file.
 
 https://github.com/sifferman/labs-with-cva6/blob/a766fc11f700cb1ad442a24339613945cd15f9e5/labs/intro/git-example.txt#L2
+
 4. Why should you always use permalinks when sending links to lines of code via GitHub?
 
 This is because it makes reviewing code much faster and more streamlined instead of having to dig for a line.
+
 5. What is a Git submodule, and what are they used for? What is the hash of the cva6 submodule that this repository uses?
 
 A git submodule is a part of one repo that is a refernce to a specific commit of another repo.
@@ -46,12 +50,14 @@ https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6
 6. What are block names? Provide a GitHub permalink to an instance of a block name in CVA6.
 Block names are blocks that are named by adding a name after keywords begin or fork. 
 https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv#L71
+7. What is DPI and what is it used for? Provide a GitHub permalink to a Verilog file that calls a DPI function, and provide a GitHub permalink to where that function is implemented.
 
 ## RISC-V Questions
 
 1. Provide a link to the latest RISC-V ISA Manual.
 https://github.com/riscv/riscv-isa-manual
-3. What are the 6 instruction formats of RISC-V? Give a one-to-three word description of each.
+2. What are the 6 instruction formats of RISC-V? Give a one-to-three word description of each.
+
     - R-Format: instructions using 3 register inputs. (add, xor, mul -arithmetic/logical ops)
     - I-Format: instructions with immediates, loads. (addi, lw, jalr, slli)
     - S-Format: store instructions. (sw, sb)
@@ -59,7 +65,8 @@ https://github.com/riscv/riscv-isa-manual
     - SB-Format: branch instructions. (beq, bge)
     - UJ-Format: jump instructions. (jal, j)
 
-5. What is a compressed instruction and what are they used for?
+3. What is a compressed instruction and what are they used for?
+
 In computing, compressed instructions are a compact variation of the instruction set of a microprocessor aimed at increasing the code density of executable programs. They are a solution to the usual increased application binary sizes found on RISC architectures. They are designed to reduce static and dynamic code size by substituting common instructions with shorter 16-bit instruction encoding.
 Link to the RISC-V Compressed Instruction Set Manual Version 1.7:
 https://riscv.org/wp-content/uploads/2015/05/riscv-compressed-spec-v1.7.pdf
@@ -67,7 +74,9 @@ https://riscv.org/wp-content/uploads/2015/05/riscv-compressed-spec-v1.7.pdf
 ## CVA6 Questions
 
 1. Attach the block diagram of CVA6 provided in the [core's documentation](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/).
-#TODO
+
+![](https://github.com/openhwgroup/cva6/raw/master/docs/01_cva6_user/_static/ariane_overview.png)
+
 
 2. Skim the [CVA6 user manual](https://docs.openhwgroup.org/projects/cva6-user-manual/01_cva6_user/) and give a one sentence summary for each of the 6 pipeline stages.
 #TODO
@@ -77,31 +86,31 @@ https://riscv.org/wp-content/uploads/2015/05/riscv-compressed-spec-v1.7.pdf
 
 4. Expand the following acronyms: RISC-V, CVA6, IF, ID, EX, I\$, D\$, FIFO, TLB, ITLB, CSR, BHT, RAS, BTB, MMU, EPC, MTVEC, LSU, PTW, DTLB, ALU, FPU, OoO, WB, AXI, APU.
     - RISC-V: "Reducded Instruction Set Computer - Five"
-    - CVA6: 
+    - CVA6: "Core Verilator Application with 6 stage pipeline"
     - IF: "Instruction Fetch"
     - ID: "Instruction Decode"
-    - EX:
-    - I\$:
-    - D\$:
+    - EX: "Executable"
+    - I\$: "Instruction Cache"
+    - D\$: "Data Cache"
     - FIFO: "First In First Out"
     - TLB: "Translation lookaside buffer"
-    - ITLB: 
+    - ITLB: "Instruction Translation Lookaside Buffer"
     - CSR: "Control and Status Register"
-    - BHT:
+    - BHT: "Branch History Table"
     - RAS: "Return-address stack"
-    - BTB: 
-    - MMU:
-    - EPC:
-    - MTVEC: 
+    - BTB: "Branch Target Buffer"
+    - MMU: "Memory Management Unit"
+    - EPC: "Evolved Packet Core"
+    - MTVEC: "Machine Trap-Vector Base-Address Register"
     - LSU: "Load Store Unit"
-    - PTW:
-    - DTLB:
+    - PTW: "Page Table Walker"
+    - DTLB: "Data Translation Lookaside Buffer"
     - ALU: "Arithmetic/Logic Unit"
     - FPU: "Floating Point Unit"
     - OoO: "Out of Order"
     - WB: "Write Back of instruction results"
-    - AXI:
-    - APU: application processing unit.
+    - AXI: "Advanced Extensible Interface"
+    - APU: "Application Processing Unit"
 
 5. What is the difference between the `"./cva6/corev_apu"` and `"./cva6/core"` directories?
 Core apu is where the applications and testing is done, where as the core is where the architecture actually is.
