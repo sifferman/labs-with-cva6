@@ -6,7 +6,7 @@
 AUX = -T aux/link.ld -I aux
 BARE = -static -nostdlib -nostartfiles -fno-common -O0
 
-all: clean examples/asm.elf examples/c.elf
+all: clean examples/asm.elf examples/c.elf bp/count_letters.elf bp/fib.elf bp/loops.elf
 
 # Create .elf from .c
 %.elf: %.c
