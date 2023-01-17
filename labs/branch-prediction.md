@@ -6,25 +6,34 @@ In this lab, you will need to modify the existing [branch predictor](https://git
 ## Pre-Lab Questions
 
 1. Define, compare, and contrast the following:
-  * Static branch prediction
-  * Dynamic branch prediction
-  * One-level branch prediction
-  * Two-level predictor
-  * Local branch prediction
-  * Global branch prediction
-2. What kind of branch predictor does CVA6 use by default?
-3. Define BHT and BTB. What are they used for? Explain the path that an instruction takes before a branch-taken can be predicted.
-4. When can more than 1 instruction be fetched per cycle?
+    * Static branch prediction
+    * Dynamic branch prediction
+    * One-level branch prediction
+    * Two-level predictor
+    * Local branch prediction
+    * Global branch prediction
+2. Define BHT, BTB and RAS. What are they used for?
+3. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled.
+4. What kind of dynamic branch predictor does CVA6 use?
+5. How is a branch resolution handled?
+6. Provide a GitHub permalink to where in `ariane_pkg` the branch predictor structs are defined.
+7. When can more than 1 instruction be fetched per cycle?
 
 ## Part 1
 
-Add a counter to [bht.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv) that records the number of predictions and mispredictions and writes the branch predictor hit rate to a file on every instruction.
+Add a counter to [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv) that records the number of predictions and mispredictions and writes the branch predictor hit rate to a file on every instruction.
 
 ### Part 1 Questions
 
-1. Share your modified `"bht.sv"` that records the hit rate.
+1. Share your changes to `"frontend.sv"` that records the hit rate.
 2. What are the final hit rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
-3. Provide a GitHub permalink to where the bht saturation counter initial value is set. Rerun all the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) and find the final hit rate for after setting the initial condition to strongly-taken, weakly-taken, weakly-not-taken, and strongly-taken. Display the hit rates in a table. Explain your findings.
+3. Provide a GitHub permalink to where in [bht.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv) the saturation counter initial value is set. Rerun all the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) and find the final hit rate for each after setting the initial condition to strongly-taken, weakly-taken, weakly-not-taken, and strongly-taken. Display the hit rates in a table. Explain your findings.
+
+### Example of How to Write to a File in Verilog/SystemVerilog
+
+```systemverilog
+// TODO
+```
 
 ## Part 2
 
