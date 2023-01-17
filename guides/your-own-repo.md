@@ -15,13 +15,13 @@ This guide offers the method of code organization and collaboration that we reco
 
 5. If you ever need to change the commit of your [labs-with-cva6](https://github.com/sifferman/labs-with-cva6) submodule, you will need to do the following:
 
-  1. `cd labs-with-cva6`
-  2. `git pull origin main` to grab the latest commit, or `git checkout <COMMIT HASH>` to grab a specific commit
-  3. `cd ..`
-  4. `git submodule update --init --recursive`
-  5. `git add labs-with-cva6`
-  6. `git commit -m "<MESSAGE, i.e. updated labs-with-cva6>"`
-  7. `git push origin main`
+    1. `cd labs-with-cva6`
+    2. `git pull origin main` to grab the latest commit, or `git checkout <COMMIT HASH>` to grab a specific commit
+    3. `cd ..`
+    4. `git submodule update --init --recursive`
+    5. `git add labs-with-cva6`
+    6. `git commit -m "<MESSAGE, i.e. updated labs-with-cva6>"`
+    7. `git push origin main`
 
 ## CVA6 Source Replacement Setup
 
