@@ -15,8 +15,7 @@ This repository includes several labs aimed at teaching advanced architecture te
 
 1. Ensure you are on a Linux/WSL2 machine.
 2. [Create an ssh key for GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent?platform=linux) and [add it to GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?platform=linux).
-3. Clone the project with `git clone git@github.com:sifferman/labs-with-cva6.git` into a directory of your choosing.
-4. Initialize all submodules with `git submodule update --init --recursive` in the `"labs-with-cva6"` directory.
+3. Follow the [GitHub setup guide](./your-own-repo.md)
 
 ## Tool Setup
 
@@ -60,7 +59,7 @@ Before starting CVA6 simulations on a new terminal session, ensure proper enviro
 
 ## Running Simulations
 
-After setup is completed, you should be able to run CVA6 simulations. The primary way to run CVA6 simulations is to build and load an [ELF file](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format). An ELF file is the standard file format used for Linux executables, so this means we can write any C/C++/RISC-V assembly program, and gcc/g++ will output a binary readable by CVA6. (You can see how the Verilog processes the ELF file [here](https://github.com/openhwgroup/cva6/blob/909d85a56cc5ace65765a63d7ed56b7ac2026f99/corev_apu/tb/ariane_tb.sv#L132-L152) and [here](https://github.com/openhwgroup/cva6/blob/e7dd85d4f9de4e3b236af92ced59a775b96ecee8/corev_apu/tb/dpi/elfloader.cc)).
+After setup is completed, you should be able to run CVA6 simulations. The primary way to run CVA6 simulations is to build and load an [ELF file](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format). An ELF file is the standard file format used for Linux executables, so this means we can write any C/C++/RISC-V assembly program, and gcc/g++ will output a binary readable by CVA6. (You can see how the Verilog processes the ELF file [here](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/corev_apu/tb/ariane_tb.sv#L132-L152) and [here](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/corev_apu/tb/dpi/elfloader.cc)).
 
 ### Building an ELF
 
