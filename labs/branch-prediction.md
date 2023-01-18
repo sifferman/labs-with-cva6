@@ -83,7 +83,7 @@ For a global two-level adaptive branch predictor, the BHT index is calculated us
 
 ## Extra Credit
 
-Branches come in many patterns in real code, and it is not uncommon to find that different styles of branch prediction have value in different situations. Extend your predictor to contain a "Tournament" of two or more predictors, with a sensible mechanism for updating trust based on successful or failed predictions.
+Branches come in many patterns in real code, and it is not uncommon to find that different styles of branch prediction have value in different situations. Extend your predictor to contain a "Tournament" of CVA6's predictor and your global predictor, with a sensible mechanism for updating trust based on successful or failed predictions.
 
 ## Code Submission
 
