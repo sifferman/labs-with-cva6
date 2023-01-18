@@ -81,6 +81,10 @@ For a global two-level adaptive branch predictor, the BHT index is calculated us
 
 [![](./bp/2bc-prediction.svg)](https://docs.boom-core.org/en/latest/sections/branch-prediction/backing-predictor.html#the-two-bit-counter-tables)
 
+## Extra Credit
+
+Branches come in many patterns in real code, and it is not uncommon to find that different styles of branch prediction have value in different situations. Extend your predictor to contain a "Tournament" of two or more predictors, with a sensible mechanism for updating trust based on successful or failed predictions.
+
 ## Code Submission
 
 Submit to the Gradescope Autograder your modified `"bht.sv"` that implements a global two-level adaptive branch predictor. The autograder will verify the hit rate for several different programs, but your implementation will be verified manually.
