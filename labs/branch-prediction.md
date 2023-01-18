@@ -13,9 +13,9 @@ In this lab, you will need to modify the existing [branch predictor](https://git
     * Local branch prediction
     * Global branch prediction
 2. Define BHT, BTB and RAS. What are they used for?
-3. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled.
-4. What kind of dynamic branch predictor does CVA6 use?
-5. How is a branch resolution handled?
+3. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled?
+4. How is a branch resolution handled?
+5. What kind of dynamic branch predictor does CVA6 use?
 6. Provide a GitHub permalink to where in `ariane_pkg` the branch predictor structs are defined.
 7. When can more than 1 instruction be fetched per cycle?
 
@@ -59,10 +59,9 @@ A few notes on your implementation:
 ### Part 2 Questions
 
 1. Share your modified `"bht.sv"` that implements the global two-level adaptive branch predictor.
-2. What specifications did you decide on for your predictor? What is your BHT index generation algorithm? How wide is your GHR? How which address bits do you use for your address?
+2. What specifications did you decide on for your predictor? What is your BHT index generation algorithm? How wide is your GHR? Which address bits do you use for your address?
 3. Briefly explain your reasoning behind the BHT index generation algorithm you chose.
-4. What are your hit percentages for each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)? Briefly explain the hit rate percentages you see for each file.
-5. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit rates and explain your findings.
+5. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) for 3 different values of `NR_ENTRIES`. Display the hit rates and explain your findings.
 
 ## Global Branch Predictor Specifications
 
