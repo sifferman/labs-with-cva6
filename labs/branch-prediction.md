@@ -19,35 +19,69 @@ In this lab, you will need to modify the existing [branch predictor](https://git
 6. Provide a GitHub permalink to where in `ariane_pkg` the branch predictor structs are defined.
 7. When can more than 1 instruction be fetched per cycle?
 
-## Part 1
+## Part 1 - CVA6 Predictor
 
 Add a counter to [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv) that records the number of predictions and mispredictions and writes the branch predictor hit rate to a file on every instruction.
 
 ### Part 1 Questions
 
-1. Share your changes to `"frontend.sv"` that records the hit rate.
+1. Highlight your changes to `"frontend.sv"` that records the hit rate.
 2. What are the final hit rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
-3. Provide a GitHub permalink to where in [bht.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv) the saturation counter initial value is set. Rerun all the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) and find the final hit rate for each after setting the initial condition to strongly-taken, weakly-taken, weakly-not-taken, and strongly-taken. Display the hit rates in a table. Explain your findings.
+3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit rates and explain your findings.
 
 ### Example of How to Write to a File in Verilog/SystemVerilog
 
 ```systemverilog
-// TODO
+integer f;
+integer counter;
+initial begin
+    f = $fopen("bp.txt","w");
+end
+always @(posedge clk) begin
+    $fwrite(f, "%f\n", $bitstoreal(counter));
+end
 ```
 
-## Part 2
+## Part 2 - Global Predictor
 
-Modify the [bht.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv) and turn it into a [Gshare Branch Predictor](https://en.wikipedia.org/wiki/Branch_predictor#Global_branch_prediction).
+In this part, you will modify the [bht.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv) and turn it into a [global two-level adaptive branch predictor](https://en.wikipedia.org/wiki/Branch_predictor#Global_branch_prediction). First, read through the [Global Branch Predictor Specifications](#global-branch-predictor-specifications) section.
+
+A few notes on your implementation:
+
+* Choose your own values for `n` and `m`
+* You can use whatever algorithm you want to calculate the BHT index
+    * You can use Gshare or Gselect
+    * You may also choose to use [XORShift](https://en.wikipedia.org/wiki/Xorshift), a simple random-number-generation algorithm, to create a hash that will index into your BHT
+* Be sure that your BHT size is decided by the parameter `NR_ENTRIES`
+* Be sure to remove all unused lines of code leftover from the initial implementation
+* Be sure to comment your design clearly
 
 ### Part 2 Questions
 
-1. Share your modified `"bht.sv"` that implements a Gshare Branch Predictor.
-2. What are your hit percentages for each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)? Explain the hit rate percentages you see for each file.
+1. Share your modified `"bht.sv"` that implements the global two-level adaptive branch predictor.
+2. What specifications did you decide on for your predictor? What is your BHT index generation algorithm? How wide is your GHR? How which address bits do you use for your address?
+3. Briefly explain your reasoning behind the BHT index generation algorithm you chose.
+4. What are your hit percentages for each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)? Briefly explain the hit rate percentages you see for each file.
+5. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit rates and explain your findings.
 
-## Gshare Branch Predictor Specifications
+## Global Branch Predictor Specifications
 
-**TODO**
+*This section describes the specifications required to build a global two-level adaptive branch predictor.*
+
+For global branch predictors, a global history record (GHR) must be kept. A GHR keeps a record of the past `n` branches using a FIFO method. To maintain the GHR, when a branch has been resolved, the branch result must be shifted onto the GHR, dropping the `n`th result.
+
+Similar to a one-level branch predictor, a two-level branch predictor contains a branch history table (BHT) where its entries are (*often*) two-bit saturation counters. However, one-level and two-level predictors differ in how the BHT index is calculated.
+
+For a global two-level adaptive branch predictor, the BHT index is calculated using the current GHR value and using `m` bits from the resolved branch's program counter. The GHR and PC can either be concatenated together (called Gselect) or xor'ed (called Gshare) together. Other BHT index calculation algorithms exist but have little effect on the predictor performance.
+
+### 2-Bit Saturation Counter
+
+[![](./bp/2bc-fsm.svg)](https://docs.boom-core.org/en/latest/sections/branch-prediction/backing-predictor.html#the-two-bit-counter-tables)
+
+### Gshare Predictor
+
+[![](./bp/2bc-prediction.svg)](https://docs.boom-core.org/en/latest/sections/branch-prediction/backing-predictor.html#the-two-bit-counter-tables)
 
 ## Code Submission
 
-Submit your modified `"bht.sv"` that implements a Gshare Branch Predictor to the Gradescope autograder.
+Submit to the Gradescope Autograder your modified `"bht.sv"` that implements a global two-level adaptive branch predictor. The autograder will verify the hit rate for several different programs, but your implementation will be verified manually.
