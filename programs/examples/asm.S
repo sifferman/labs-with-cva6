@@ -20,3 +20,13 @@ _start: # entry point
 # Data segment
 
 arr: .asciz "Hello, world!"
+
+
+        .section ".tohost","aw",@progbits
+        .globl tohost
+        .globl fromhost
+
+        .align 6
+tohost: .dword 0
+        .align 6
+fromhost: .dword 0
