@@ -3,23 +3,14 @@
 # Description: Makefile for compiling for CVA6.
 #
 
-AUX = -T aux/link.ld -I aux
-BARE = -static -nostdlib -nostartfiles -fno-common -O0
+AUX = -T aux/link.ld
+BARE = -static -nostdlib -nostartfiles -march=rv64imafd -O0
 
-all: clean examples/asm.elf examples/c.elf bp/count_letters.elf bp/fib.elf bp/loops.elf
-
-# Create .elf from .c
-%.elf: %.c
-	riscv64-unknown-elf-gcc ${BARE} $< -o $@ ${AUX}
+all: clean examples/asm.elf bp/loop.elf bp/div.elf bp/spaghetti.elf
 
 # Create .elf from .S
 %.elf: %.S
-	riscv64-unknown-elf-gcc ${BARE} $< -o $@ ${AUX}
+	riscv64-unknown-elf-gcc ${BARE} $< ${AUX} -o $@
 
 clean:
 	rm -rf *.elf **/*.elf
-
-
-# Create .S from .c
-%.S: %.c
-	riscv64-unknown-elf-gcc -S -fverbose-asm ${BARE} $< -o $@ ${AUX}
