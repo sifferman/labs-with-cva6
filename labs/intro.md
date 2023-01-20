@@ -45,8 +45,7 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 1. What is an ELF file and where are they used? (Not specific to CVA6)
 2. What is the difference between segments and sections?
 3. Compile [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please also provide a screenshot.
-4. Write a `.s` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide both the `.s` file and the `.elf` file in your submission.)
-5. Write a `.c` file that contains a `for` loop with iteration count of at least 5. Compile it to an ELF file. (Provide both the `.c` file and the `.elf` file in your submission.)
+4. Write a `.s` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide only the `.s` file in your submission.)
 
 ## Simulation Questions
 
@@ -59,4 +58,3 @@ Also, when providing screenshots of waveforms, please include all signals you de
 3. Give the hierarchical path and GitHub permalink of the declaration of the instruction in the execute stage.
 4. Simulate [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and give the time and a waveform screenshot of the `add` instruction occurring in the ALU. Provide justification.
 5. Simulate the `.s` file you wrote, and provide the timestamp and a waveform screenshot at: a taken branch, a store to memory, a register file write, and a decode of a compressed instruction. Provide justification.
-6. Simulate the `.c` file you wrote, and provide the timestamp and a waveform screenshot at the `for` loop beginning and end. Provide justification.
