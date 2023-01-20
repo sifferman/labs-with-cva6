@@ -23,9 +23,7 @@ This guide offers the method of code organization and collaboration that we reco
     6. `git commit -m "<MESSAGE, i.e. updated labs-with-cva6>"`
     7. `git push origin main`
 
-## CVA6 Source Replacement Setup
-
-**TODO**
+6. Add your source files to your repository where desired. You may optionally add a script to automatically overwrite CVA6's source files with your own source files.
 
 ## Footnotes
 
