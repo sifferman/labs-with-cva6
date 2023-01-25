@@ -44,17 +44,19 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 
 1. What is an ELF file and where are they used? (Not specific to CVA6)
 2. What is the difference between segments and sections?
-3. Compile [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please also provide a screenshot.
-4. Write a `.s` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide only the `.s` file in your submission.)
+3. Compile [`"./programs/examples/asm.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.S), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please also provide a screenshot.
+4. Write a `.S` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide only the `.S` file in your submission.)
 
 ## Simulation Questions
 
 Refer to the [Getting Started Guide](../guides/getting-started.md) if you need help setting up the required tools for simulation.
 
-Also, when providing screenshots of waveforms, please include all signals you decide are relevant to demonstrate the event. Improper justification will result in a lower score.
+All CVA6 hierarchical paths should start with "TOP.ariane_testharness.i_ariane.i_cva6.". Each module/struct should be separated with "." until you reach the delcaration of the net.
 
-1. Give the hierarchical path and GitHub permalink of the declaration of the PC in the instruction decode stage.
-2. Give the hierarchical path and GitHub permalink of the declaration of the ALU output.
-3. Give the hierarchical path and GitHub permalink of the declaration of the instruction in the execute stage.
-4. Simulate [`"./programs/examples/asm.s"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.s), and give the time and a waveform screenshot of the `add` instruction occurring in the ALU. Provide justification.
-5. Simulate the `.s` file you wrote, and provide the timestamp and a waveform screenshot at: a taken branch, a store to memory, a register file write, and a decode of a compressed instruction. Provide justification.
+When providing screenshots of waveforms, please include all signals you decide are relevant to demonstrate the event. Improper justification will result in a lower score.
+
+1. Give the net hierarchical path and GitHub permalink of the PC in the instruction decode stage.
+2. Give the net hierarchical path and GitHub permalink of the ALU output.
+3. Give the net hierarchical path and GitHub permalink of the register file write enable in the commit stage.
+4. Simulate [`"./programs/examples/asm.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.S), and provide a waveform screenshot of the `add` instruction occurring in the ALU. Provide justification.
+5. Simulate the `.S` file you wrote, and provide a waveform screenshot at: a taken branch, a store to memory, a register file write, and a decode of a compressed instruction. Provide justification.
