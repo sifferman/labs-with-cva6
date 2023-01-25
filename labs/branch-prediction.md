@@ -27,7 +27,7 @@ Add a counter to [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27
 
 1. Highlight your changes to `"frontend.sv"` that records the hit rate.
 2. What are the final hit rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
-3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit rates and explain your findings.
+3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit rates in a table and explain your findings.
 
 ### Example of How to Write to a File in Verilog/SystemVerilog
 
@@ -61,17 +61,17 @@ A few notes on your implementation:
 1. Share your modified `"bht.sv"` that implements the global two-level adaptive branch predictor.
 2. What specifications did you decide on for your predictor? What is your BHT index generation algorithm? How wide is your GHR? Which address bits do you use for your address?
 3. Briefly explain your reasoning behind the BHT index generation algorithm you chose.
-5. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) for 3 different values of `NR_ENTRIES`. Display the hit rates and explain your findings.
+4. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) for 3 different values of `NR_ENTRIES`. Display the hit rates in a table and explain your findings.
 
 ## Global Branch Predictor Specifications
 
 *This section describes the specifications required to build a global two-level adaptive branch predictor.*
 
-For global branch predictors, a global history record (GHR) must be kept. A GHR keeps a record of the past `n` branches using a FIFO method. To maintain the GHR, when a branch has been resolved, the branch result must be shifted onto the GHR, dropping the `n`th result.
+For global branch predictors, a global history record (GHR) must be kept. A GHR keeps a record of the past `n` branches using a FIFO method. To maintain the GHR, when a branch has been resolved, the branch result must be shifted into the GHR while simultaneously dropping the `n`th result.
 
 Similar to a one-level branch predictor, a two-level branch predictor contains a branch history table (BHT) where its entries are (*often*) two-bit saturation counters. However, one-level and two-level predictors differ in how the BHT index is calculated.
 
-For a global two-level adaptive branch predictor, the BHT index is calculated using the current GHR value and using `m` bits from the resolved branch's program counter. The GHR and PC can either be concatenated together (called Gselect) or xor'ed (called Gshare) together. Other BHT index calculation algorithms exist but have little effect on the predictor performance.
+For a global two-level adaptive branch predictor, the BHT index is calculated using the current GHR value and using `m` bits from the resolved branch's program counter. The GHR and PC can either be concatenated together (called Gselect) or xor'ed together (called Gshare). Other BHT index calculation algorithms exist but have little effect on the predictor performance.
 
 ### 2-Bit Saturation Counter
 
