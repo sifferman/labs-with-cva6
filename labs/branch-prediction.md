@@ -1,7 +1,7 @@
 
 # Branch Prediction
 
-In this lab, you will need to modify the existing [branch predictor](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv). See the [Your Own Repository Guide](../guides/your-own-repo.md) for our recommended way to organize and collaborate on labs.
+In this lab, you will need to modify the existing [branch predictor](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/bht.sv). See the [Your Own Repository Guide](../guides/your-own-repo.md) for our recommended way to organize and collaborate on labs.
 
 ## Pre-Lab Questions
 
@@ -13,7 +13,7 @@ In this lab, you will need to modify the existing [branch predictor](https://git
     * Local branch prediction
     * Global branch prediction
 2. Define BHT, BTB and RAS. What are they used for?
-3. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled?
+3. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled?
 4. How is a branch resolution handled?
 5. What kind of dynamic branch predictor does CVA6 use?
 6. Provide a GitHub permalink to where in `ariane_pkg` the branch predictor structs are defined.
@@ -21,15 +21,15 @@ In this lab, you will need to modify the existing [branch predictor](https://git
 
 ## Part 1 - CVA6 Predictor
 
-Add functionality to [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv) that records the branch predictor hit-rate.
+Add functionality to [frontend.sv](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv) that records the branch predictor hit-rate.
 
-To do this, you can create an `always_ff @(posedge clk)` block that counts how many times [is_mispredict](https://github.com/openhwgroup/cva6/blob/32abc1ccda15877936e7e383e0013a3da0a2b33c/core/frontend/frontend.sv#L248) is true, and how many times the current instruction is a [branch](https://github.com/openhwgroup/cva6/blob/32abc1ccda15877936e7e383e0013a3da0a2b33c/core/frontend/frontend.sv#L222). The hit-rate can be calculated with 1-num_mispredicts/num_branches. You can then record the hit-rate to a file on every clock cycle; this way, you are certain to get the final hit-rate when the simulation terminates.
+To do this, you can create an `always_ff @(posedge clk)` block that counts how many times [is_mispredict](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L248) is true, and how many times the current instruction is a [branch](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L222). The hit-rate can be calculated with 1-num_mispredicts/num_branches. You can then record the hit-rate to a file on every clock cycle; this way, you are certain to get the final hit-rate when the simulation terminates.
 
 ### Part 1 Questions
 
 1. Highlight your changes to `"frontend.sv"` that records the hit-rate.
 2. What are the final hit-rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
-3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit-rates in a table and explain your findings.
+3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for [`NR_ENTRIES`](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L419). Display the hit-rates in a table and explain your findings.
 
 ### Example of How to Write to a File in Verilog/SystemVerilog
 
@@ -46,7 +46,7 @@ end
 
 ## Part 2 - Global Predictor
 
-In this part, you will modify the [bht.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/bht.sv) and turn it into a [global two-level adaptive branch predictor](https://en.wikipedia.org/wiki/Branch_predictor#Global_branch_prediction). First, read through the [Global Branch Predictor Specifications](#global-branch-predictor-specifications) section.
+In this part, you will modify the [bht.sv](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/bht.sv) and turn it into a [global two-level adaptive branch predictor](https://en.wikipedia.org/wiki/Branch_predictor#Global_branch_prediction). First, read through the [Global Branch Predictor Specifications](#global-branch-predictor-specifications) section.
 
 A few notes on your implementation:
 
