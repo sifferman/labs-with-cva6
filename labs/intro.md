@@ -12,7 +12,7 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 1. What is a Git commit? What is the hash of the commit that first added [this file](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro.md) to this repository?
 2. Using [`"./labs/intro/git-example.txt"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/intro/git-example.txt), provide a link (URL) to the line that describes who wrote that file.
 3. Using that same file, open its initial commit and create a permalink to the line that describes who wrote that file.
-4. Why should you always use permalinks when sending links to lines of code via GitHub?
+4. Why should you always use permalinks as opposed to regular links when sharing lines of code via GitHub?
 5. What is a Git submodule, and what are they used for? What is the hash of the cva6 submodule that this repository uses?
 
 ## SystemVerilog Questions
@@ -41,6 +41,8 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 6. What is AXI and what is it primarily used for in CVA6?
 
 ## ELF Questions
+
+Note that you can view the contents of an ELF file with the following command: `riscv64-unknown-elf-objdump -d <PATH TO PROGRAM>.elf`
 
 1. What is an ELF file and where are they used? (Not specific to CVA6)
 2. What is the difference between segments and sections?
