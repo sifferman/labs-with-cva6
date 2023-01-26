@@ -21,13 +21,15 @@ In this lab, you will need to modify the existing [branch predictor](https://git
 
 ## Part 1 - CVA6 Predictor
 
-Add a counter to [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv) that records the number of predictions and mispredictions and writes the branch predictor hit rate to a file on every instruction.
+Add functionality to [frontend.sv](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/core/frontend/frontend.sv) that records the branch predictor hit-rate.
+
+To do this, you can create an `always_ff @(posedge clk)` block that counts how many times [is_mispredict](https://github.com/openhwgroup/cva6/blob/32abc1ccda15877936e7e383e0013a3da0a2b33c/core/frontend/frontend.sv#L248) is true, and how many times the current instruction is a [branch](https://github.com/openhwgroup/cva6/blob/32abc1ccda15877936e7e383e0013a3da0a2b33c/core/frontend/frontend.sv#L222). The hit-rate can be calculated with 1-num_mispredicts/num_branches. You can then record the hit-rate to a file on every clock cycle; this way, you are certain to get the final hit-rate when the simulation terminates.
 
 ### Part 1 Questions
 
-1. Highlight your changes to `"frontend.sv"` that records the hit rate.
-2. What are the final hit rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
-3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit rates in a table and explain your findings.
+1. Highlight your changes to `"frontend.sv"` that records the hit-rate.
+2. What are the final hit-rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
+3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for `NR_ENTRIES`. Display the hit-rates in a table and explain your findings.
 
 ### Example of How to Write to a File in Verilog/SystemVerilog
 
@@ -61,7 +63,7 @@ A few notes on your implementation:
 1. Share your modified `"bht.sv"` that implements the global two-level adaptive branch predictor.
 2. What specifications did you decide on for your predictor? What is your BHT index generation algorithm? How wide is your GHR? Which address bits do you use for your address?
 3. Briefly explain your reasoning behind the BHT index generation algorithm you chose.
-4. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) for 3 different values of `NR_ENTRIES`. Display the hit rates in a table and explain your findings.
+4. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) for 3 different values of `NR_ENTRIES`. Display the hit-rates in a table and explain your findings.
 
 ## Global Branch Predictor Specifications
 
@@ -87,4 +89,4 @@ Branches come in many patterns in real code, and it is not uncommon to find that
 
 ## Code Submission
 
-Submit to the Gradescope Autograder your modified `"bht.sv"` that implements a global two-level adaptive branch predictor. The autograder will verify the hit rate for several different programs, but your implementation will be verified manually.
+Submit to the Gradescope Autograder your modified `"bht.sv"` that implements a global two-level adaptive branch predictor. The autograder will verify the hit-rate for several different programs, but your implementation will be verified manually.
