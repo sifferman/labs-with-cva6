@@ -59,7 +59,7 @@ Before starting CVA6 simulations on a new terminal session, ensure proper enviro
 
 ## Running Simulations
 
-After setup is completed, you should be able to run CVA6 simulations. The primary way to run CVA6 simulations is to build and load an [ELF file](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format). An ELF file is the standard file format used for Linux executables, so this means we can write any C/C++/RISC-V assembly program, and gcc/g++ will output a binary readable by CVA6. (You can see how the Verilog processes the ELF file [here](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/corev_apu/tb/ariane_tb.sv#L132-L152) and [here](https://github.com/openhwgroup/cva6/blob/6deffb27d7f031341e33e84c422a19e39095aa6c/corev_apu/tb/dpi/elfloader.cc)).
+After setup is completed, you should be able to run CVA6 simulations. The primary way to run CVA6 simulations is to build and load an [ELF file](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format). An ELF file is the standard file format used for Linux executables, so this means we can write any C/C++/RISC-V assembly program, and gcc/g++ will output a binary readable by CVA6. (You can see how the Verilog processes the ELF file [here](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/corev_apu/tb/ariane_tb.sv#L132-L152) and [here](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/corev_apu/tb/dpi/elfloader.cc)).
 
 ### Building an ELF
 
