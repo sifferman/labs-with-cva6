@@ -23,7 +23,7 @@ In this lab, you will need to modify the existing [branch predictor](https://git
 
 Add functionality to [frontend.sv](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv) that records the branch predictor hit-rate.
 
-To do this, you can create an `always_ff @(posedge clk)` block that counts how many times [is_mispredict](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L248) is true, and how many times the current instruction is a [branch](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L222). The hit-rate can be calculated with 1-num_mispredicts/num_branches. You can then record the hit-rate to a file on every clock cycle; this way, you are certain to get the final hit-rate when the simulation terminates.
+To do this, you can create an `always_ff @(posedge clk)` block that counts how many times a branch has been resolved, and how many of those resolutions were mispredicts. ([Branch resolve net](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L30); [branch resolve type](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/include/ariane_pkg.sv#L338-L345).) The hit-rate can be calculated with 1-num_mispredicts/num_valid_resolutions. You can then record the hit-rate to a file on every clock cycle; this way, you are certain to get the final hit-rate when the simulation terminates.
 
 ### Part 1 Questions
 
