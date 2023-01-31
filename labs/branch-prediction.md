@@ -40,7 +40,7 @@ initial begin
     f = $fopen("bp.txt","w");
 end
 always @(posedge clk) begin
-    $fwrite(f, "%f\n", $bitstoreal(counter));
+    $fwrite(f, "%f\n", $itor(counter));
 end
 ```
 
