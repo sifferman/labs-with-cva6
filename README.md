@@ -5,6 +5,7 @@
 
 1. [Introducion to CVA6](./labs/intro.md)
 2. [Branch Prediction](./labs/branch-prediction.md)
+3. [Caching](./labs/caching.md)
 
 ## Guides
 
