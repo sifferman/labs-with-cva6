@@ -1,0 +1,83 @@
+CAPI=2:
+name: ucsbece154b::victim_cache:1.0.0
+description: UCSB ECE154B Victim Cache
+
+filesets:
+  # default
+  rtl:
+    files:
+      - ucsbece154b_victim_cache.sv
+    file_type: systemVerilogSource
+
+  # tb
+  tb:
+    files:
+      - assert.svh: {is_include_file: true}
+      - tb.sv
+    file_type: systemVerilogSource
+
+
+targets:
+  default: &default
+    filesets:
+      - rtl
+
+  tb: # fusesoc run --target tb ucsbece154b::victim_cache
+    <<: *default
+    description: Simulate the design
+    toplevel: tb
+    default_tool: verilator
+    filesets_append:
+      - tb
+    tools:
+      verilator:
+        verilator_options:
+          - --binary
+          - -j 0
+          - --trace-fst
+          - --x-assign unique
+          - --x-initial unique
+          - --unroll-count 10000
+          - --unroll-stmts 1000000
+        run_options:
+          - +verilator+rand+reset+2
+
+
+  lint: &lint
+    <<: *default
+    description: Lint the design
+    toplevel: ucsbece154b_victim_cache
+    default_tool: verilator
+    tools:
+      verilator:
+        mode: lint-only
+        verilator_options:
+          - -Wall
+          - --language 1800-2017
+          - --unroll-count 10000
+          - --unroll-stmts 1000000
+
+
+  lint_1way: # fusesoc run --target lint_1way ucsbece154b::victim_cache
+    <<: *lint
+    parameters:
+      - NR_ENTRIES=1
+  lint_2way: # fusesoc run --target lint_2way ucsbece154b::victim_cache
+    <<: *lint
+    parameters:
+      - NR_ENTRIES=2
+  lint_4way: # fusesoc run --target lint_4way ucsbece154b::victim_cache
+    <<: *lint
+    parameters:
+      - NR_ENTRIES=4
+  lint_16way: # fusesoc run --target lint_16way ucsbece154b::victim_cache
+    <<: *lint
+    parameters:
+      - NR_ENTRIES=16
+
+
+parameters:
+  NR_ENTRIES:
+    datatype: int
+    description: Set victim cache size
+    paramtype: vlogparam
