@@ -51,8 +51,8 @@ In this lab, you will add a victim cache to the [CVA6 I-Cache](https://github.co
     4. How many CPU clock cycles are needed to read from an HDD over SATA? (Assume a total latency of 10ms)
 4. Caches are designed using SRAM. What are the pros and cons of using SRAM instead of DRAM or flip-flops for caches?
 5. Provided is a circuit diagram of an SRAM cell and SRAM array. (BL - Bit line, WL - Word Line, Q - data) Use it to give a 1-sentence response for each of the following questions.
-    [![SRAM Cell 6T](./caching/SRAM_Cell_6T.svg)](https://en.wikipedia.org/wiki/Static_random-access_memory)
-    [![SRAM Array](./caching/SRAM_Array.png)](http://www.barth-dev.de/knowledge-corner/digital-design/memory-array-architectures/)
+    [![SRAM Cell 6T](./caching/figures/SRAM_Cell_6T.svg)](https://en.wikipedia.org/wiki/Static_random-access_memory)
+    [![SRAM Array](./caching/figures/SRAM_Array.png)](http://www.barth-dev.de/knowledge-corner/digital-design/memory-array-architectures/)
     1. How is a bit read from an SRAM cell?
     2. How is a bit written to an SRAM cell?
     3. How is a word read from an SRAM array?
@@ -65,7 +65,7 @@ In this part, you will finish an implementation of a Victim Cache.
 
 The implementation should be a fully-associative cache with LRU replacement policy. It should have support for any positive integer cache size, meaning that the LRU algorithm will change a bit depending on the specified size. For a cache size of 1, there is no LRU logic necessary because only one way can be replaced. For a cache size of 2, there should be a single bit specifying which way was least recently accessed, and therefore which way should be replaced. For a cache size >2, there should be a doubly-linked-list (DLL) that orders each way from LRU to MRU; every read/write should bump the corresponding way to the MRU of the DLL, and every write should replace the LRU of the DLL.
 
-The module you need to finish is [`"ucsbece154b_victim_cache.sv"`](https://github.com/sifferman/labs-with-cva6/tree/main/labs/caching/starter/ucsbece154b_victim_cache.sv), found in [`"labs/caching/starter"`](https://github.com/sifferman/labs-with-cva6/tree/main/labs/caching/starter), and should be simulated with ModelSim with `make sim TOOL=modelsim` (or Verilator 5 with `make sim TOOL=verilator` assuming that you have it set up). A sample testbench is provided that you may edit as desired.
+The module you need to finish is [`"ucsbece154b_victim_cache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/ucsbece154b_victim_cache.sv), found in [`"labs/caching/starter"`](https://github.com/sifferman/labs-with-cva6/tree/main/labs/caching/starter). Your job will be to fix all the lines labeled `// TODO`. You can simulate your changes with ModelSim using `make sim TOOL=modelsim` (or Verilator 5 using `make sim TOOL=verilator` assuming that you have it set up). A [sample testbench](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/tb.sv) is provided that you may edit as desired.
 
 ## Part 2
 
