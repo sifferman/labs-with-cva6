@@ -7,7 +7,7 @@ In this lab, you will add a victim cache to the [CVA6 I-Cache](https://github.co
 
 ### Verilog/SystemVerilog Questions
 
-1. For the following questions, please use [DigitalJS Online](https://digitaljs.tilk.eu/), a Verilog synthesis visualizer, to support your answers.
+1. For the following questions, please provide a screenshot from [DigitalJS Online](https://digitaljs.tilk.eu/), a Verilog synthesis visualizer, to support your answers.
     1. How is a Verilog/SystemVerilog `for` loop synthesized?
     2. How is a Verilog/SystemVerilog `if` statement synthesized?
 2. CVA6 uses a common design practice of appending `_d` and `_q` to the end of net names. What does each mean? How should each net type be assigned? Why can this practice be more useful than using a single net?
@@ -50,7 +50,7 @@ In this lab, you will add a victim cache to the [CVA6 I-Cache](https://github.co
     3. How many CPU clock cycles are needed to read from an SSD over SATA? (Assume a total latency of 70&mu;s)
     4. How many CPU clock cycles are needed to read from an HDD over SATA? (Assume a total latency of 10ms)
 4. Caches are designed using SRAM. What are the pros and cons of using SRAM instead of DRAM or flip-flops for caches?
-5. Provided is a circuit diagram of an SRAM cell and SRAM array. (BL - Bit line, WL - Word Line, Q - data) Use it to give a 1-sentence response for each of the following questions.
+5. Provided is a circuit diagram of an SRAM cell and SRAM array. (BL - Bit Line, WL - Word Line, Q - data) Use them to give a 1-sentence response for each of the following questions:
     [![SRAM Cell 6T](./caching/figures/SRAM_Cell_6T.svg)](https://en.wikipedia.org/wiki/Static_random-access_memory)
     [![SRAM Array](./caching/figures/SRAM_Array.png)](http://www.barth-dev.de/knowledge-corner/digital-design/memory-array-architectures/)
     1. How is a bit read from an SRAM cell?
