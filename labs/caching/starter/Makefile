@@ -37,7 +37,7 @@ clean:
 # Files
 
 fusesoc.conf: ${CORE_FILE}
-	pip3 install -r requirements.txt
+	pip3 install --user -r requirements.txt
 	rm -f fusesoc.conf
 	fusesoc library add ${VENDOR}_${LIBRARY}_${CORE}_${VERSION} . --sync-type=local
 
