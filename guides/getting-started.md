@@ -31,11 +31,11 @@ All necessary tools have been installed to linux.engr.ucsb.edu. Therefore we rec
 ```bash
 # ECE 154B local machine ~/.bashrc additions
 # Author: Ethan Sifferman <ethan@sifferman.dev>
-# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave
+# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave, pip user
 export RISCV_ROOT=<REPLACE THIS WITH YOUR RISCV ROOT>
 export VERILATOR_ROOT=<REPLACE THIS WITH YOUR VERILATOR 4.110 ROOT>
 export OSS_CAD_SUITE=<REPLACE THIS WITH YOUR OSS CAD SUITE ROOT>
-export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:$OSS_CAD_SUITE/bin
+export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:$OSS_CAD_SUITE/bin:~/.local/bin
 # end ECE 154B
 ```
 
@@ -46,12 +46,12 @@ Add the following to your `"~/.bashrc"`:
 ```bash
 # ECE 154B linux.engr ~/.bashrc additions
 # Author: Ethan Sifferman <ethan@sifferman.dev>
-# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave, modelsim
+# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave, modelsim, pip user
 export RISCV_ROOT=/ece/riscv
 export VERILATOR_ROOT=/ece/verilator-4.110
 export MODEL_TECH=/ece/mentor/ModelSimSE-10.6e/modeltech/bin
 export LM_LICENSE_FILE=1717@license.ece.ucsb.edu
-export PATH=$MODEL_TECH:$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:/ece/oss-cad-suite/bin
+export PATH=$MODEL_TECH:$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:/ece/oss-cad-suite/bin:~/.local/bin
 # end ECE 154B
 ```
 
