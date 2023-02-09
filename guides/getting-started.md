@@ -46,10 +46,12 @@ Add the following to your `"~/.bashrc"`:
 ```bash
 # ECE 154B linux.engr ~/.bashrc additions
 # Author: Ethan Sifferman <ethan@sifferman.dev>
-# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave
+# Purpose: Configure riscv64-unknown-elf-gcc, fesvr, verilator-4.110, gtkwave, modelsim
 export RISCV_ROOT=/ece/riscv
 export VERILATOR_ROOT=/ece/verilator-4.110
-export PATH=$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:/ece/oss-cad-suite/bin
+export MODEL_TECH=/ece/mentor/ModelSimSE-10.6e/modeltech/bin
+export LM_LICENSE_FILE=1717@license.ece.ucsb.edu
+export PATH=$MODEL_TECH:$RISCV_ROOT/bin:$VERILATOR_ROOT/bin:$PATH:/ece/oss-cad-suite/bin
 # end ECE 154B
 ```
 
