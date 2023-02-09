@@ -20,7 +20,6 @@ sim: fusesoc.conf
 	fusesoc run --target tb --tool ${TOOL} ucsbece154b::victim_cache
 
 init: fusesoc.conf
-	pip3 install -r requirements.txt
 
 lint_1way: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
@@ -38,6 +37,7 @@ clean:
 # Files
 
 fusesoc.conf: ${CORE_FILE}
+	pip3 install -r requirements.txt
 	rm -f fusesoc.conf
 	fusesoc library add ${VENDOR}_${LIBRARY}_${CORE}_${VERSION} . --sync-type=local
 
