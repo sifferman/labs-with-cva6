@@ -1,3 +1,16 @@
+/*
+ * File: ucsbece154b_victim_cache.sv
+ * Description: Starter file for a victim cache.
+ * Directions:
+ *  The implementation should be a fully-associative cache with LRU replacement policy. It should
+ *  have support for any positive integer cache size, meaning that the LRU algorithm will change a
+ *  bit depending on the specified size. For a cache size of 1, there is no LRU logic necessary
+ *  because only one way can be replaced. For a cache size of 2, there should be a single bit
+ *  specifying which way was least recently accessed, and therefore which way should be replaced.
+ *  For a cache size >2, there should be a doubly-linked-list (DLL) that orders each way from LRU
+ *  to MRU; every read/write should bump the corresponding way to the MRU of the DLL, and every
+ *  write should replace the LRU of the DLL.
+ */
 
 module ucsbece154b_victim_cache #(
     parameter int unsigned ADDR_WIDTH = 56,
@@ -176,6 +189,7 @@ always_comb begin
             hit_o = '0; // TODO
             rdata_o = '0; // TODO
             lru_bump(way_index_t'(i));
+            break;
         end
     end
     // handle write port

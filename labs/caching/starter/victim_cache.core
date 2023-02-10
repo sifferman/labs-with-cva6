@@ -1,3 +1,8 @@
+#
+# File: victim_cache.core
+# Description: FuseSoC core file to help running th victim cache testbench.
+#
+
 CAPI=2:
 name: ucsbece154b::victim_cache:1.0.0
 description: UCSB ECE154B Victim Cache
@@ -12,8 +17,8 @@ filesets:
   # tb
   tb:
     files:
-      - assert.svh: {is_include_file: true}
-      - tb.sv
+      - tb/assert.svh: {is_include_file: true}
+      - tb/victim_cache_tb.sv
     file_type: systemVerilogSource
 
 
@@ -25,7 +30,7 @@ targets:
   tb: # fusesoc run --target tb ucsbece154b::victim_cache
     <<: *default
     description: Simulate the design
-    toplevel: tb
+    toplevel: victim_cache_tb
     default_tool: verilator
     filesets_append:
       - tb
