@@ -103,8 +103,14 @@ RISC-V allows multiple different implementations of virtual memory. By default, 
 
 ### Part 2 Questions
 
-1. Tell me about the I-Cache
-2. Tell me more!
+1. Using the original CVA6 icache, [`"cva6/cache_subsystem/cva6_icache.sv"`](https://github.com/openhwgroup/cva6/blob/master/core/cache_subsystem/cva6_icache.sv), answer the following questions:
+   1. How is the table index calculated?
+   2. How is the tag calculated?
+   3. Provide a permalink to the logic that causes the core to stall, assuming a miss has occurred and the main memory request hasn't been fulfilled yet.
+2. Using the modified icache, [`"ucsbece154b_icache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/part2/ucsbece154b_icache.sv), answer the following questions:
+   1. When is the victim cache written to?
+   2. What occurs in the `VICTIM_HIT` state?
+   3. What occurs in the `VICTIM_MISS` state?
 3. Show the changes you made to [`"cva6/core/Flist.cva6"`](https://github.com/openhwgroup/cva6/blob/master/core/Flist.cva6).
 4. Provide a program that demonstrates the following behaviors of the I$ and victim cache, and provide waveform screenshots of each event.
    1. An I$ miss.
