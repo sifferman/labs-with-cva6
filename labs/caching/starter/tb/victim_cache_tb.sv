@@ -1,7 +1,11 @@
+/*
+ * File: victim_cache_tb.sv
+ * Description: Example testbench to test a victim cache.
+ */
 
 `include "assert.svh"
 
-module tb ();
+module victim_cache_tb ();
 
 parameter int unsigned ADDR_WIDTH = 56;
 parameter int unsigned LINE_WIDTH = 128;

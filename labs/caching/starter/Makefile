@@ -1,4 +1,7 @@
-# ======================================================= #
+#
+# File: Makefile
+# Description: Makefile for running the victim cache testbench.
+#
 
 CORE_FILE = victim_cache.core
 VENDOR	= ucsbece154b

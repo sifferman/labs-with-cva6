@@ -1,3 +1,7 @@
+/*
+ * File: assert.svh
+ * Description: Macro to help with handling errors in testbences.
+ */
 
 `ifndef __ASSERT_SVH
 `define __ASSERT_SVH

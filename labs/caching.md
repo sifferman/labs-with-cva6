@@ -65,8 +65,65 @@ In this part, you will finish an implementation of a Victim Cache.
 
 The implementation should be a fully-associative cache with LRU replacement policy. It should have support for any positive integer cache size, meaning that the LRU algorithm will change a bit depending on the specified size. For a cache size of 1, there is no LRU logic necessary because only one way can be replaced. For a cache size of 2, there should be a single bit specifying which way was least recently accessed, and therefore which way should be replaced. For a cache size >2, there should be a doubly-linked-list (DLL) that orders each way from LRU to MRU; every read/write should bump the corresponding way to the MRU of the DLL, and every write should replace the LRU of the DLL.
 
-The module you need to finish is [`"ucsbece154b_victim_cache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/ucsbece154b_victim_cache.sv), found in [`"labs/caching/starter"`](https://github.com/sifferman/labs-with-cva6/tree/main/labs/caching/starter). Your job will be to fix all the lines labeled `// TODO`. You can simulate your changes with ModelSim using `make sim TOOL=modelsim` (or Verilator 5 using `make sim TOOL=verilator` assuming that you have it set up). A [sample testbench](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/tb.sv) is provided that you may edit as desired.
+The module you need to finish is [`"ucsbece154b_victim_cache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/ucsbece154b_victim_cache.sv), found in [`"labs/caching/starter"`](https://github.com/sifferman/labs-with-cva6/tree/main/labs/caching/starter). Your job will be to fix all the lines labeled `// TODO`. You can simulate your changes with ModelSim using `make sim TOOL=modelsim` (or Verilator 5 using `make sim TOOL=verilator` assuming that you have it set up). A [sample testbench](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/tb/victim_cache_tb.sv) is provided that you may edit as desired.
 
 ## Part 2
 
-*Coming soon...*
+In this part, you will change the CVA6 filelist to add your victim cache to the I-Cache. Additionally, you will write a simple assembly program that verifies the I-Cache and MMU work as intended.
+
+### Updates to I-Cache
+
+CVA6's I-Cache is implemented here: [`"cva6/core/cache_subsystem/cva6_icache.sv"`](https://github.com/openhwgroup/cva6/blob/master/core/cache_subsystem/cva6_icache.sv). It is highly parameterizable, allowing you to change the number of entries, the number of ways, and more. A modified version of this implementation is provided to you here, [`"ucsbece154b_icache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/part2/ucsbece154b_icache.sv), which calls the victim cache that you created in the previous part.
+
+Try to read through the files and answer the questions below.
+
+### Option `-f <file>`
+
+(Nearly) all Verilog/SystemVerilog tools have the command-line option `-f <file>` which reads the specified file as additional command line arguments. ([Verilator `-f` documentation](https://veripool.org/guide/latest/exe_verilator.html#cmdoption-0)). This is extremely useful and common for providing a list of RTL files, because any files specified will be treated as source files to be compiled. CVA6's [Makefile](https://github.com/openhwgroup/cva6/blob/a63226d8bedcda16709436d932bf5e40c45c9fbe/Makefile#L542) calls `-f` on [`"cva6/core/Flist.cva6"`](https://github.com/openhwgroup/cva6/blob/master/core/Flist.cva6).
+
+Modify [`"cva6/core/Flist.cva6"`](https://github.com/openhwgroup/cva6/blob/master/core/Flist.cva6) by removing the file [`"cva6/cache_subsystem/cva6_icache.sv"`](https://github.com/openhwgroup/cva6/blob/master/core/cache_subsystem/cva6_icache.sv), and adding the files [`"ucsbece154b_icache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/part2/ucsbece154b_icache.sv) and [`"ucsbece154b_victim_cache.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/caching/starter/ucsbece154b_victim_cache.sv). (Be sure that you get the paths correct; feel free to move files as needed.)
+
+### Verify the I-Cache
+
+Write a program that meets the specifications described in the [Part 2 Questions](#part-2-questions). Provided are list of hints to help you:
+
+* The victim cache will only be written to when all the ways of a cache index are full.
+* You should jump between multiple instructions with PCs that give the same cache index value.
+* You can align instructions to a PC with a power of 2 by prefacing the instruction with the directive `.align <size-log-2>`.
+* You can view the instructions and PCs of an ELF file with the following command: `riscv64-unknown-elf-objdump -d <PATH TO PROGRAM>.elf`
+
+### Verify the MMU
+
+Write a program that meets the specifications described in the [Part 2 Questions](#part-2-questions).
+
+RISC-V allows multiple different implementations of virtual memory. By default, CVA6 implements the "sv39" mode. This is what you should use for this lab.
+
+* The RTL for the sv39 MMU is found here: [`"cva6/core/mmu_sv39/"`](https://github.com/openhwgroup/cva6/tree/master/core/mmu_sv39)
+* The net hierarchical path to the MMU is `TOP.ariane_testharness.i_ariane.i_cva6.ex_stage_i.lsu_i.gen_mmu_sv39.i_cva6_mmu`.
+
+### Part 2 Questions
+
+1. Tell me about the I-Cache
+2. Tell me more!
+3. Show the changes you made to [`"cva6/core/Flist.cva6"`](https://github.com/openhwgroup/cva6/blob/master/core/Flist.cva6).
+4. Provide a program that demonstrates the following behaviors of the I$ and victim cache, and provide waveform screenshots of each event.
+   1. An I$ miss.
+   2. An I$ hit. What value+tag was read?
+   3. A write to the victim cache. What value+tag was written?
+   4. A victim cache hit. What value+tag was read?
+5. What is the purpose of virtual memory?
+6. Define the following: MMU, PTW, TLB.
+7. Provide a program that demonstrates the following behaviors of the MMU and provide waveform screenshots of each event.
+   1. 2 separate instructions that occur in 2 different frames. For each instruction, observe/calculate the following:
+      1. What is the virtual address?
+      2. What is the virtual page number?
+      3. What is the virtual page offset?
+      4. What is the physical frame address?
+      5. What is the physical frame number?
+      6. What is the physical frame offset?
+   2. A TLB miss.
+   3. A TLB hit. Observe/calculate the following:
+      1. What is the virtual address?
+      2. What is the virtual page number?
+      3. What is the physical frame address?
+      4. What is the physical frame number?
