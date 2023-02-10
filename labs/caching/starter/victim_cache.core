@@ -1,8 +1,3 @@
-#
-# File: victim_cache.core
-# Description: FuseSoC core file to help running th victim cache testbench.
-#
-
 CAPI=2:
 name: ucsbece154b::victim_cache:1.0.0
 description: UCSB ECE154B Victim Cache
