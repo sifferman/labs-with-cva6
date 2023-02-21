@@ -119,17 +119,17 @@ RISC-V allows multiple different implementations of virtual memory. By default, 
    4. A victim cache hit. What value+tag was read?
 5. What is the purpose of virtual memory?
 6. Define the following: MMU, PTW, TLB.
-7. Provide a program that demonstrates the following behaviors of the MMU and provide waveform screenshots of each event.
-   1. 2 separate instructions that occur in 2 different frames. For each instruction, observe/calculate the following:
-      1. What is the virtual address?
-      2. What is the virtual page number?
-      3. What is the virtual page offset?
-      4. What is the physical frame address?
-      5. What is the physical frame number?
-      6. What is the physical frame offset?
-   2. A TLB miss.
-   3. A TLB hit. Observe/calculate the following:
-      1. What is the virtual address?
-      2. What is the virtual page number?
-      3. What is the physical frame address?
-      4. What is the physical frame number?
+7. ~~Provide a program that demonstrates the following behaviors of the MMU and provide waveform screenshots of each event.~~
+   1. ~~2 separate instructions that occur in 2 different frames. For each instruction, observe/calculate the following:~~
+      1. ~~What is the virtual address?~~
+      2. ~~What is the virtual page number?~~
+      3. ~~What is the virtual page offset?~~
+      4. ~~What is the physical frame address?~~
+      5. ~~What is the physical frame number?~~
+      6. ~~What is the physical frame offset?~~
+   2. ~~A TLB miss.~~
+   3. ~~A TLB hit. Observe/calculate the following:~~
+      1. ~~What is the virtual address?~~
+      2. ~~What is the virtual page number?~~
+      3. ~~What is the physical frame address?~~
+      4. ~~What is the physical frame number?~~
