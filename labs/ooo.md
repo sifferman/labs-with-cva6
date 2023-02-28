@@ -21,7 +21,11 @@ Read through the [CVA6 Execute Stage Documentation](https://docs.openhwgroup.org
     1. Read-Write (RAW)
     2. Write-Write (WAW)
     3. Write-Read (WAR)
-6. Provide a GitHub permalink to the following in CVA6:
+6. Using the following diagram of the CVA6 backend, explain the path that an instruction must take through the issue and execute stage. Be sure to include the issue queue, transaction IDs, source operands, the destination register, `rd_clobber`, the scoreboard, and any other important logic in your explanation.
+
+    [![Scoreboard](./ooo/scoreboard.svg)](https://docs.openhwgroup.org/projects/cva6-user-manual/03_cva6_design/issue_stage.html)
+
+7. Provide a GitHub permalink to the following in CVA6:
     1. The issue queue instantiation
     2. The logic that specifies if a functional unit is ready to execute a new instruction
     3. The logic that stalls the pipeline due to the execute stage being too full for the next instruction
