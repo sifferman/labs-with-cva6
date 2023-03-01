@@ -9,9 +9,7 @@ Read through the [CVA6 Execute Stage Documentation](https://docs.openhwgroup.org
 
 1. What is the purpose of Out-of-Order?
 2. Give a brief explanation of Scoreboarding and Tomasulo's Algorithm. What are the pros and cons of each? Which OoO strategy does CVA6 use? (Extra: [Tomasulo's original paper](https://ieeexplore.ieee.org/document/5392028))
-3. Although they are not included in CVA6, briefly describe the purposes of the following, and give a short pseudocode example where they would be used.
-    1. Reorder Buffer
-    2. Rename Unit
+3. CVA6's rename unit will not be enabled for this lab. However, provide pseudocode that would run faster assuming the rename unit was enabled.
 4. For each of the 7 functional units, provide:
     1. A brief explanation of its function.
     2. Which instructions it handles.
@@ -39,23 +37,23 @@ Write a program that demonstrates the following situations:
 * Read-Write hazard
 * Write-Write hazard
 * Write-Read hazard
-* A branch miss after a `div` instruction
-* An issue queue full of non-compressed instructions
-* An issue queue full of compressed instructions
+* A branch miss
+* The issue queue full
+
+First, you will need to enable OoO in CVA6 by increasing the number of commit ports to `4` in the [configuration file](https://github.com/openhwgroup/cva6/blob/ed56df/core/include/cv64a6_imafdc_sv39_config_pkg.sv#L35).
 
 ## Part 1 Questions
 
 When providing screenshots of waveforms, please include all signals you decide are relevant to demonstrate the event. Improper justification will result in a lower score.
 
 1. Share your program. Be sure each situation is clearly commented.
-2. Provide screenshots of the following situations:
+2. Provide a waveform screenshot and a breif explanation of how the issue queue is affected for each of the following situations:
     1. Out-of-Order Execution
     2. Read-Write hazard
     3. Write-Write hazard
     4. Write-Read hazard
-    5. A branch miss after a `div` instruction
-    6. An issue queue full of non-compressed instructions
-    7. An issue queue full of compressed instructions
+    5. A branch miss
+    6. The issue queue full
 
 ## Part 2
 
