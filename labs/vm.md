@@ -8,7 +8,7 @@ In addition to the lectures, please use the following resources to help you with
 
 ## Provided Code Explanation
 
-You have been provided a simple Bootloader and OS: [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S). It is an example of how to set up and enable a page table, and lower the privilage to U-mode.
+You have been provided a simple Bootloader and OS: [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S). It is an example of how to set up and enable a page table, and lower the privilege to U-mode.
 
 These are the steps it takes in more detail:
 
@@ -30,13 +30,13 @@ Note, out of simplicity's sake, there are a few important OS features that have 
 
 In this lab, you will be implementing basic trap handlers.
 
-### Privilage
+### privilege
 
-To enable virtual memory, the core must either be in S-mode or U-mode. The core begins in M-mode, so the OS has to lower the privilage.
+To enable virtual memory, the core must either be in S-mode or U-mode. The core begins in M-mode, so the OS has to lower the privilege.
 
 [![Privilege Levels](./vm/priv_levels.png)](https://danielmangum.com/posts/risc-v-bytes-privilege-levels/)
 
-This is demonstrated in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilage.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilage.S).
+This is demonstrated in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S).
 
 ## Prelab
 
@@ -58,7 +58,7 @@ You will need the [RISC-V Privileged Architecture Manual](https://github.com/ris
     2. List and define the 9 bottom bits of a Sv39 page table entry.
     3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 9 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
 5. Draw a diagram of the hierarchical page table created in the provided code.
-6. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilage.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilage.S), several control/status registers are written. For each of the registers, provide the bit diagram, and a definition of each of any fields that each  programs uses.
+6. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide the bit diagram, and a definition of each of any fields that each  programs uses.
     1. `mstatus`
     2. `sstatus`
     3. `mepc`
@@ -92,11 +92,11 @@ The CVA6 testbench is currently configured that any `ecall` instruction will sto
 13. Return to the `m_trap` trap handler
 14. Have `m_trap` run `ecall` to exit the simulation
 
-*Note: reference [`"programs/vm/privilage.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilage.S) to help you set up your trap handlers.*
+*Note: reference [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S) to help you set up your trap handlers.*
 
-## CVA6 Trace Log
+### CVA6 Trace Log
 
-CVA6 simulations create a log file: `"cva6/trace_hart_00.dasm"`. For every instruction that the simulation ran, it shows the cycle number, VPC, privilage mode, and instruction. It will be a very useful reference for this lab.
+CVA6 simulations create a log file: `"cva6/trace_hart_00.dasm"`. For every instruction that the simulation ran, it shows the cycle number, VPC, privilege mode, and instruction. It will be a very useful reference for this lab.
 
 Notes:
 
@@ -107,4 +107,4 @@ Notes:
 
 1. Show your modifications to `"riscv_pkg.sv"`.
 2. Show your modifications to `"os.S"`.
-3. Provide a screenshot of the waveform where the user program's address has to be translated from a virtual address to a physical address.
+3. Provide a screenshot of the waveform where the user program's address is translated from a virtual address to a physical address.
