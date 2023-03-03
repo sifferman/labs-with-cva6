@@ -1,6 +1,6 @@
 /*
- * File: privilage.S
- * Description: Example of how to switch between different privilage modes.
+ * File: privilege.S
+ * Description: Example of how to switch between different privilege modes.
  * Reference: "RISC-V Bytes: Privilege Levels" by Daniel Mangum <https://danielmangum.com/posts/risc-v-bytes-privilege-levels/>
  */
 
