@@ -21,7 +21,7 @@ Read through the [CVA6 Execute Stage Documentation](https://docs.openhwgroup.org
     3. Write-Read (WAR)
 6. Using the following diagram of the CVA6 backend, explain the path that an instruction must take through the issue and execute stage. Be sure to include the issue queue, transaction IDs, source operands, the destination register, `rd_clobber`, the scoreboard, and any other important logic in your explanation.
 
-    [![Scoreboard](./ooo/scoreboard.svg)](https://docs.openhwgroup.org/projects/cva6-user-manual/03_cva6_design/issue_stage.html)
+    [![Scoreboard](./ooo/figures/scoreboard.svg)](https://docs.openhwgroup.org/projects/cva6-user-manual/03_cva6_design/issue_stage.html)
 
 7. Provide a GitHub permalink to the following in CVA6:
     1. The issue queue instantiation
