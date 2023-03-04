@@ -1,0 +1,94 @@
+CAPI=2:
+name: ucsbece154b:ooo:fifo:1.0.0
+description: UCSB ECE154B FIFO
+
+filesets:
+  # default
+  rtl:
+    files:
+      - ucsbece154b_fifo.sv
+      - lint.vlt: {file_type: vlt}
+    file_type: systemVerilogSource
+
+  # tb
+  tb:
+    files:
+      - tb/assert.svh: {is_include_file: true}
+      - tb/fifo_tb.sv
+    file_type: systemVerilogSource
+
+
+targets:
+  default: &default
+    filesets:
+      - rtl
+
+  tb: &tb # fusesoc run --target tb ucsbece154b:ooo:fifo
+    <<: *default
+    description: Simulate the design
+    toplevel: fifo_tb
+    default_tool: verilator
+    filesets_append:
+      - tb
+    tools:
+      verilator:
+        verilator_options:
+          - --binary
+          - -j 0
+          - --trace-fst
+          - --x-assign unique
+          - --x-initial unique
+          - --unroll-count 10000
+          - --unroll-stmts 1000000
+        run_options:
+          - +verilator+rand+reset+2
+
+  tb_resized_small: # fusesoc run --target tb_resized_small ucsbece154b:ooo:fifo
+    <<: *tb
+    parameters:
+      - DATA_WIDTH=13
+      - NR_ENTRIES=2
+
+  tb_resized_big: # fusesoc run --target tb_resized_big ucsbece154b:ooo:fifo
+    <<: *tb
+    parameters:
+      - DATA_WIDTH=51
+      - NR_ENTRIES=13
+
+  lint: &lint
+    <<: *default
+    description: Lint the design
+    toplevel: ucsbece154b_fifo
+    default_tool: verilator
+    tools:
+      verilator:
+        mode: lint-only
+        verilator_options:
+          - -Wall
+          - --language 1800-2017
+          - --unroll-count 10000
+          - --unroll-stmts 1000000
+
+
+  lint_resized_small: # fusesoc run --target lint_resized_small ucsbece154b:ooo:fifo
+    <<: *lint
+    parameters:
+      - DATA_WIDTH=13
+      - NR_ENTRIES=2
+  lint_resized_big: # fusesoc run --target lint_resized_big ucsbece154b:ooo:fifo
+    <<: *lint
+    parameters:
+      - DATA_WIDTH=51
+      - NR_ENTRIES=13
+
+
+
+parameters:
+  DATA_WIDTH:
+    datatype: int
+    description: Set fifo data width
+    paramtype: vlogparam
+  NR_ENTRIES:
+    datatype: int
+    description: Set fifo size
+    paramtype: vlogparam
