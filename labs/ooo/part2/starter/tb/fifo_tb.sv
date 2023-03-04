@@ -65,7 +65,7 @@ end
 //\\ =========================== \\//
 $display( "End simulation.");
 if (ERROR) $fatal();
-$finish;
+$stop;
 end
 
 endmodule
