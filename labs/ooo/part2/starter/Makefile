@@ -14,7 +14,7 @@ TESTS = $(shell find tests -type f)
 
 # ======================================================= #
 
-.PHONY: init build sim view lint clean
+.PHONY: init build sim view lint synth clean
 
 # ======================================================= #
 # Targets
@@ -34,6 +34,9 @@ lint_resized_small: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
 lint_resized_big: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
+
+synth:
+	cd synth && make
 
 clean:
 	rm -rf build fusesoc.conf
