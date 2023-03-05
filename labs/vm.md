@@ -6,7 +6,19 @@ In addition to the lectures, please use the following resources to help you with
 * [RISC-V Privileged Architecture Manual](https://github.com/riscv/riscv-isa-manual)
 * ["RISC-V Bytes: Privilege Levels" by Daniel Mangum](https://danielmangum.com/posts/risc-v-bytes-privilege-levels/)
 
-## Provided Code Explanation
+## Privilege
+
+RISC-V has functionality for "privilege modes". Depending on the privilege mode a program is in, certain functionalities or memory addresses can be enabled or disabled.
+
+* Machine-mode: Highest privilege, all memory addresses are enabled, used by bootloader.
+* Supervisor-mode: Everything is enabled except addresses used for user programs, and virtual memory is enabled. Used by OS.
+* User-mode: Only addresses specifically allowed can be accessed. Used by programs.
+
+[![Privilege Levels](./vm/priv_levels.png)](https://danielmangum.com/posts/risc-v-bytes-privilege-levels/)
+
+A core will always start in M-mode, which disables virtual memory. To enable virtual memory, OS must lower the privilege to either S-mode or U-mode. This is demonstrated in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S).
+
+## Provided OS Explanation
 
 You have been provided a simple Bootloader and OS: [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S). It is an example of how to set up and enable a page table, and lower the privilege to U-mode.
 
@@ -30,35 +42,25 @@ Note, out of simplicity's sake, there are a few important OS features that have 
 
 In this lab, you will be implementing basic trap handlers.
 
-### privilege
-
-To enable virtual memory, the core must either be in S-mode or U-mode. The core begins in M-mode, so the OS has to lower the privilege.
-
-[![Privilege Levels](./vm/priv_levels.png)](https://danielmangum.com/posts/risc-v-bytes-privilege-levels/)
-
-This is demonstrated in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S).
-
 ## Prelab
 
 You will need the [RISC-V Privileged Architecture Manual](https://github.com/riscv/riscv-isa-manual) to answer some of these questions.
 
 1. What is the purpose of virtual memory?
 2. Define the following: MMU, PTW, TLB.
-3. For Sv39, give
+3. What is the benefit of a multi-layer page table?
+4. For Sv39, give
     1. The number of bits in a VA
     2. The number of bits in a PA
     3. The number of layers a PT can be
-    4. The size of a PT in bytes
-    5. The size of a page in bytes
-    6. The size of a PTE
-    7. How many PTEs are in 1 PT
-    8. The total maximum number of PTEs across all layers
-4. Complete the following page table entry questions.
+    4. The size of a page in bytes
+    5. The size of a PTE
+5. Complete the following page table entry questions.
     1. Provide a diagram of a Sv39 PTE.
     2. List and define the 9 bottom bits of a Sv39 page table entry.
     3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 9 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
-5. Draw a diagram of the hierarchical page table created in the provided code.
-6. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide the bit diagram, and a definition of each of any fields that each  programs uses.
+6. Draw a diagram of the hierarchical page table created in the provided code.
+7. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide a screenshot of the bit diagram, and a definition of each of any fields that each  programs uses.
     1. `mstatus`
     2. `sstatus`
     3. `mepc`
@@ -77,20 +79,20 @@ The CVA6 testbench is currently configured that any `ecall` instruction will sto
 
 ### OS Modification
 
-1. *Same initial setup...*
-2. Create `m_trap` and `s_trap` trap handlers that are assigned to `mtvec` and `stvec`
-3. Create a counter that specifies which user program should be run (initialized to 1)
-4. Load user program 1 to memory and configure the page table accordingly
-5. Run user program 1 that has an `ecall` instruction
-6. Return to the `s_trap` trap handler
-7. Have `s_trap` increment the user program counter, then return to the OS with `mret`
-8. Load user program 2 to a different VA and PA than user program 1, and configure the page table accordingly
-9. Run user program 2 that has an `ecall` instruction
-10. Return to the `s_trap` trap handler
-11. Have `s_trap` increment the user program counter, then return to the OS with `mret`
-12. On user program counter > 2, the OS runs `ecall`
-13. Return to the `m_trap` trap handler
-14. Have `m_trap` run `ecall` to exit the simulation
+0. *Same initial setup...*
+1. Create `m_trap` and `s_trap` trap handlers that are assigned to `mtvec` and `stvec`
+2. Create a counter that specifies which user program should be run (initialized to 1)
+3. Load user program 1 to memory and configure the page table accordingly
+4. Run user program 1 that has an `ecall` instruction
+5. Return to the `s_trap` trap handler
+6. Have `s_trap` increment the user program counter, then return to the OS with `mret`
+7. Load user program 2 to a different VA and PA than user program 1, and configure the page table accordingly
+8. Run user program 2 that has an `ecall` instruction
+9. Return to the `s_trap` trap handler
+10. Have `s_trap` increment the user program counter, then return to the OS with `mret`
+11. On user program counter > 2, the OS runs `ecall`
+12. Return to the `m_trap` trap handler
+13. Have `m_trap` run `ecall` to exit the simulation
 
 *Note: reference [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S) to help you set up your trap handlers.*
 
@@ -105,6 +107,6 @@ Notes:
 
 ### Lab Questions
 
-1. Show your modifications to `"riscv_pkg.sv"`.
+1. Show your modifications to `"rvfi_tracer.sv"`.
 2. Show your modifications to `"os.S"`.
 3. Provide a screenshot of the waveform where the user program's address is translated from a virtual address to a physical address.
