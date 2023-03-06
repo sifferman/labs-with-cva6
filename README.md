@@ -7,6 +7,7 @@
 2. [Branch Prediction](./labs/branch-prediction.md)
 3. [Caching](./labs/caching.md)
 4. [Out-of-Order](./labs/ooo.md)
+5. [Virtual Memory](./labs/vm.md)
 
 ## Guides
 
