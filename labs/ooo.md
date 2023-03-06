@@ -10,10 +10,10 @@ Read through the [CVA6 Execute Stage Documentation](https://docs.openhwgroup.org
 1. What is the purpose of Out-of-Order?
 2. Give a brief explanation of Scoreboarding and Tomasulo's Algorithm. What are the pros and cons of each? Which OoO strategy does CVA6 use? (Extra: [Tomasulo's original paper](https://ieeexplore.ieee.org/document/5392028))
 3. CVA6's rename unit will not be enabled for this lab. However, provide pseudocode that would run faster assuming the rename unit was enabled.
-4. CVA6 has 7 functional units in [`"ex_stage.sv"`](https://github.com/openhwgroup/cva6/blob/master/core/ex_stage.sv): ALU, Branch Unit, LSU, Multiplier, CSR Buffer, FPU and CVXIF. For each of the 7 functional units, provide:
+4. CVA6 has 7 functional units in [`"ex_stage.sv"`](https://github.com/openhwgroup/cva6/blob/master/core/ex_stage.sv): ALU, Branch Unit, LSU, Multiplier, CSR Buffer, [FPU](https://github.com/openhwgroup/cvfpu), and [CVXIF](https://github.com/openhwgroup/core-v-xif). For each of the 7 functional units, provide:
     1. A brief explanation of its function.
     2. Which instructions it handles.
-    3. How many cycles it takes to execute.
+    3. How many cycles it takes to execute. (You don't have to do this question for the FPU and CVXIF).
 5. Briefly describe when the following hazards can occur:
     1. Read-Write (RAW)
     2. Write-Write (WAW)
@@ -22,7 +22,7 @@ Read through the [CVA6 Execute Stage Documentation](https://docs.openhwgroup.org
 
     [![Scoreboard](./ooo/figures/scoreboard.svg)](https://docs.openhwgroup.org/projects/cva6-user-manual/03_cva6_design/issue_stage.html)
 
-7. Provide a GitHub permalink to the following in CVA6:
+7. After looking through the issue stage and scoreboard RTL, Provide a GitHub permalink to the following in CVA6:
     1. The issue queue instantiation
     2. The logic that specifies if a functional unit is ready to execute a new instruction
     3. The logic that stalls the pipeline due to the execute stage being too full for the next instruction
