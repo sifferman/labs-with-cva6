@@ -8,15 +8,15 @@ In addition to the lectures, please use the following resources to help you with
 
 ## Privilege
 
-RISC-V has functionality for "privilege modes". Depending on the privilege mode a program is in, certain functionalities or memory addresses can be enabled or disabled.
+RISC-V has functionality for "privilege modes". Depending on the privilege mode a program is in, certain functionalities or memory addresses can be enabled or disabled. This is a summary of the privilege modes:
 
-* Machine-mode: Highest privilege, all memory addresses are enabled, used by bootloader.
-* Supervisor-mode: Everything is enabled except addresses used for user programs, and virtual memory is enabled. Used by OS.
-* User-mode: Only addresses specifically allowed can be accessed. Used by programs.
+* Machine-mode: Highest privilege, all memory addresses are enabled. Used by bootloader.
+* Supervisor-mode: All addresses except user addresses are enabled. Used by OS.
+* User-mode: Lowest privilege, only user addresses can be accessed. Used by programs.
 
 [![Privilege Levels](./vm/priv_levels.png)](https://danielmangum.com/posts/risc-v-bytes-privilege-levels/)
 
-A core will always start in M-mode, which disables virtual memory. To enable virtual memory, OS must lower the privilege to either S-mode or U-mode. This is demonstrated in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S).
+A core will always start in M-mode, which does not support virtual memory. To enable virtual memory, OS must lower the privilege to either S-mode or U-mode. This is demonstrated in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S).
 
 ## Provided OS Explanation
 
@@ -60,7 +60,7 @@ You will need the [RISC-V Privileged Architecture Manual](https://github.com/ris
     2. List and define the 9 bottom bits of a Sv39 page table entry.
     3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 9 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
 6. Draw a diagram of the hierarchical page table created in the provided code.
-7. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide a screenshot of the bit diagram, and a definition of each of any fields that each  programs uses.
+7. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide a screenshot of the bit diagram, and a definition of each of any fields that the provided programs use. (For example, [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) only uses the `SUM` from `sstatus`, so `SUM` is the only field you need to give a definition of for `sstatus`).
     1. `mstatus`
     2. `sstatus`
     3. `mepc`
@@ -109,4 +109,15 @@ Notes:
 
 1. Show your modifications to `"rvfi_tracer.sv"`.
 2. Show your modifications to `"os.S"`.
-3. Provide a screenshot of the waveform where the user program's address is translated from a virtual address to a physical address.
+3. Provide your `"trace_hart_00.dasm"` file, and highlight the following behaviors:
+    1. Enter `bootloader` in M-mode
+    2. Enter `OS` in S-mode
+    3. Enter user program 1 in U-mode; also provide its virtual and physical address
+    4. Enter `s_trap` in S-mode
+    5. Renter `OS` in S-mode
+    6. Enter user program 2 in U-mode; also provide its virtual and physical address
+    7. Renter `s_trap` in S-mode
+    8. Renter `OS` in S-mode
+    9. Enter `m_trap` in M-mode
+    10. Exit
+4. Provide a screenshot of a waveform demonstrating how the MMU translates the user program's virtual address to its physical address.
