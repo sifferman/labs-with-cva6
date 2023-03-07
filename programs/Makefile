@@ -6,7 +6,7 @@
 AUX = -T aux/link.ld
 BARE = -static -nostdlib -nostartfiles -march=rv64imafdc -O0
 
-all: clean examples/asm.elf bp/loop.elf bp/div.elf bp/spaghetti.elf vm/privilege.elf vm/os.elf
+all: clean examples/asm.elf bp/loop.elf bp/div.elf bp/spaghetti.elf vm/privilege.elf vm/os.elf rvf/fpu_example.elf
 
 # Create .elf from .S
 %.elf: %.S
