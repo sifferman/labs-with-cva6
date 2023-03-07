@@ -39,7 +39,15 @@ Write a program that demonstrates the following situations:
 * A branch miss
 * The issue queue full
 
-First, you will need to enable OoO in CVA6 by increasing the number of commit ports to `4` in the [configuration file](https://github.com/openhwgroup/cva6/blob/ed56df/core/include/cv64a6_imafdc_sv39_config_pkg.sv#L35).
+Note:
+
+* No more than 1 fixed latency unit operation (`ALU`, `CTRL_FLOW`, `CSR`, `MULT`) can be run simultaneously.
+* No more than 1 floating point unit operation (`FPU`, `FPU_VEC`) can be run simultaneously.
+* No more than 1 load-store unit operation (`LOAD`, `STORE`) can be run simultaneously.
+
+To enable out-of-order execution, your program must use a mix of instructions from the 3  functional unit types.
+
+An example of how to run RISC-V floating point instructions (RVF) is provided here: [`"fpu_example.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/rvf/fpu_example.S)
 
 ## Part 1 Questions
 
