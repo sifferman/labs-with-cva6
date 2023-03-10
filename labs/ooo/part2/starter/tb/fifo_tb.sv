@@ -31,7 +31,6 @@ ucsbece154b_fifo #(
 int i;
 logic ERROR = 0;
 initial begin
-$dumpfile( "dump.fst" );
 $dumpvars;
 $display( "Begin simulation." );
 //\\ =========================== \\//
@@ -64,7 +63,6 @@ end
 
 //\\ =========================== \\//
 $display( "End simulation.");
-if (ERROR) $fatal();
 $stop;
 end
 
