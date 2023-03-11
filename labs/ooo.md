@@ -75,6 +75,7 @@ You should implement your FIFO with a cyclical buffer. You should have one block
 * If the `head` or `tail` pointer reach `NR_ENTRIES`, they should reset to `0`.
 * If the FIFO is empty, you should never pop.
 * If the FIFO is full, you should only push if you are also popping.
+* Both pushing and popping should occur on `posedge clk_i`, and reset should occur synchronously.
 
 The module you need to finish is [`"ucsbece154b_fifo.sv"`](https://github.com/sifferman/labs-with-cva6/blob/main/labs/ooo/part2/starter/ucsbece154b_fifo.sv), found in [`"labs/ooo/part2/starter"`](https://github.com/sifferman/labs-with-cva6/tree/main/labs/ooo/part2/starter). You can simulate your changes with ModelSim using `make tb TOOL=modelsim` (or Verilator 5 using `make tb TOOL=verilator` assuming that you have it set up). A [sample testbench](https://github.com/sifferman/labs-with-cva6/blob/main/labs/ooo/part2/starter/tb/fifo_tb.sv) is provided that you may edit as desired. You will also be graded on whether your design is synthesizable. You can run `make synth` to verify that it synthesizes with Yosys+Surelog correctly.
 
