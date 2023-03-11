@@ -30,7 +30,7 @@ These are the steps it takes in more detail:
 4. **Jump to the OS in S-mode**
 5. Enable virtual memory using the page table
 6. Add the user program to the page table
-7. Load the user program to the page table
+7. Load the user program to user memory
 8. **Jump to the program in U-mode**
 9. [`"rvfi_tracer.sv"`](https://github.com/openhwgroup/cva6/blob/ed56dfd77dd977de747947b99714f88b4c4c1300/corev_apu/tb/rvfi_tracer.sv#L74-L77) hits a breakpoint at `ecall` and exits the simulation
 
