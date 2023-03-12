@@ -57,8 +57,8 @@ You will need the [RISC-V Privileged Architecture Manual](https://github.com/ris
     5. The size of a PTE
 5. Complete the following page table entry questions.
     1. Provide a diagram of a Sv39 PTE.
-    2. List and define the 9 bottom bits of a Sv39 page table entry.
-    3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 9 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
+    2. List and define the 10 bottom bits of a Sv39 page table entry.
+    3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 8 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
 6. Draw a diagram of the hierarchical page table created in the provided code.
 7. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide a screenshot of the bit diagram, and a definition of each of any fields that the provided programs use. (For example, [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) only uses the `SUM` from `sstatus`, so `SUM` is the only field you need to give a definition of for `sstatus`).
     1. `mstatus`
