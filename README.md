@@ -13,3 +13,4 @@
 
 * [Getting Started](./guides/getting-started.md)
 * [Using GtHub for Storing Class Materials](./guides/your-own-repo.md)
+* [Writing Synthesizable SystemVerilog](./guides/synthesis.md)
