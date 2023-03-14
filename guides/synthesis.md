@@ -1,9 +1,11 @@
 
 # Writing Synthesizable SystemVerilog
 
-This guide gives a brief overview of how to write Synthesizable SystemVerilog. (When this guide fails, please move on to this guide: ["Busting the Myth that SystemVerilog is only for Verification"](https://sutherland-hdl.com/papers/2013-SNUG-SV_Synthesizable-SystemVerilog_paper.pdf).)
+This guide gives a brief overview of how to write synthesizable SystemVerilog. (When this guide fails, please move on to this guide: ["Busting the Myth that SystemVerilog is only for Verification"](https://sutherland-hdl.com/papers/2013-SNUG-SV_Synthesizable-SystemVerilog_paper.pdf).)
 
-SystemVerilog and Verilog are overwhelmingly popular in digital design, but are partnered with extremely underdeveloped and unreliable software. This leads to extremely frequent instances of Verilog software not warning on bad code, and instances of software not understanding good code. For example, this repository provides a Verilog-2005 design that works with some tools, but not with others: <https://github.com/ucsb-ece154a/verilog_best_practices_example>
+SystemVerilog and Verilog are overwhelmingly popular in digital design, but are partnered with extremely underdeveloped and unreliable software. This leads to extremely frequent instances of Verilog software not warning on bad code, and instances of software not understanding good code. For example, here is an example of a Verilog-2005 design that works with some tools, but not with others: <https://github.com/ucsb-ece154a/verilog_best_practices_example>.
+
+By following this guide, you will learn how to overcome the shortcomings of Verilog/SystemVerilog tools and write synthesizable code that meets your desired specifications.
 
 ## Table of Contents
 
