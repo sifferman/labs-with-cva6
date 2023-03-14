@@ -5,9 +5,32 @@ This guide gives a brief overview of how to write Synthesizable SystemVerilog. (
 
 SystemVerilog and Verilog are overwhelmingly popular in digital design, but are partnered with extremely underdeveloped and unreliable software. This leads to extremely frequent instances of Verilog software not warning on bad code, and instances of software not understanding good code. For example, this repository provides a Verilog-2005 design that works with some tools, but not with others: <https://github.com/ucsb-ece154a/verilog_best_practices_example>
 
+## Table of Contents
+
+* [DigitalJS Online](#digitaljs-online)
+* [Inference](#inference)
+* [Combinational Logic](#combinational-logic)
+* [Latches](#latches)
+* [Flip-Flops](#flip-flops)
+* [Memory](#memory)
+* [Clocks and Reset](#clocks-and-reset)
+* [Simulation Tools](#simulation-tools)
+* [Synthesis Tools](#synthesis-tools)
+* [OSS CAD Suite](#oss-cad-suite)
+
 ## DigitalJS Online
 
 [DigitalJS Online](https://digitaljs.tilk.eu/) is an incredible website that uses Verilator, Yosys, and ElkJS to lint, synthesize, and visualize any valid Verilog design. Playing around with this website for more than an hour will teach you more about Verilog than reading 90% of all the available online Verilog resources.
+
+## Inference
+
+Verilog and SystemVerilog are behavioral, which means that these languages describe the intended behavior of a circuit, and not the logic required to implement the design using physical hardware.
+
+Inference in Verilog and SystemVerilog refers to the process by which logic cells or hardware components are automatically generated from the behavioral code. Synthesis tools will automatically infer which logic gates and other hardware components are necessary to implement the specified behavior.
+
+Additionally, when mapping a synthesized design to a specified target (FPGA/ASIC), the synthesis tool will need to adjust its netlist to ensure that it only uses what logic cells are available. For example, an FPGA without any dedicated adder cells must use the gates it has available to implement an adder if one was described behaviorally.
+
+The exception to this is that Verilog and SystemVerilog allow explicit instantiation of synthesis primitives to force logic cells to be added to the netlist. For example, [`$_DFF_N_`](https://github.com/YosysHQ/yosys/blob/master/techlibs/ice40/ff_map.v), [`SB_MAC16`](https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/AD/DSPFunctionUsageGuideforICE40Devices.ashx?document_id=50669), [`DSP48E1`](https://docs.xilinx.com/v/u/en-US/ug479_7Series_DSP48E1), etc.
 
 ## Combinational Logic
 
@@ -20,6 +43,8 @@ assign data_plus1   = data_i        + WIDTH'(1);
 assign data_plus2   = data_plus1    + WIDTH'(1);
 assign data_o       = data_plus2    + WIDTH'(1);
 ```
+
+`always_comb` blocks allow for procedural assignment, which enables greater design flexibility.
 
 ```systemVerilog
 always_comb begin : data_set
@@ -57,7 +82,7 @@ end
 
 A common practice is to split your flip-flops into `_d` and `_q` nets. This way, your code is oganized better because all your combinational logic is clearly done to your `_d` net in a `always_comb` block, and your `_q` nets are assigned in a `always_ff` block using reset and the `_d` nets. Plus, `always_ff` blocks do not allow for procedural assignment, so `always_comb` blocks are always better for combinational logic.
 
-*Another popular naming strategy is to use `<NAME>_next` and `<NAME>` instead of `<NAME>_d` and `<NAME>_q`. This is a personal preference. Most important is matching the coding style already introduced by the developers of the project you are working on.*
+Another popular naming strategy is to use `<NAME>_next` and `<NAME>` instead of `<NAME>_d` and `<NAME>_q`. This is a personal preference. Most important is matching the coding style already introduced by the developers of the project you are working on.
 
 Note: the following are infamously buggy in synthesis tools:
 
@@ -82,9 +107,11 @@ always_ff @(posedge clk_i) begin : data_ff
 end
 ```
 
-## BRAM
+## Memory
 
-To infer a BRAM, you should structure your code like this:
+Memories in designs are common, and FPGAs often have built-in block RAMs (BRAMs) that you can use! Unfortunately, synthesis tools are usually really bad at inferring memories from a design, and will often incorrectly infer an array of DFFs. If you want a BRAM, then you should either use target-specific BRAM primitives ([SB_RAM40_4K](https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/MO/MemoryUsageGuideforiCE40Devices.ashx?document_id=47775), [RAMB36E1](https://docs.xilinx.com/r/en-US/ug953-vivado-7series-libraries/RAMB36E1), etc.) or write clear behavioral code that the tool developers allow for memory inference.
+
+For a tool to have the greatest success of inferring a memory, you should structure your code like this:
 
 ```systemVerilog
 // instantiation
@@ -108,7 +135,7 @@ When synthesizing your design, you often want to manually tell your synthesis so
 
 ## Simulation Tools
 
-There are several Verilog Simulators to choose from, and each have pros and cons. Here is a quick summary of a few important ones.
+There are several Verilog Simulators to choose from, and each have pros and cons. Here is a quick summary of a few important ones:
 
 ### Open Source
 
@@ -135,7 +162,7 @@ The proprietary tool will depend on what your FPGA supports.
 
 ## OSS CAD Suite
 
-If you want a fully open-source design flow, you will need to install a dozen tools that each do different things. You will need [Icarus](https://github.com/steveicarus/iverilog), [Verilator](https://github.com/verilator/verilator), [GTKWave](https://github.com/gtkwave/gtkwave), [Yosys](https://github.com/YosysHQ/yosys), [Surelog](https://github.com/chipsalliance/Surelog), [sv2v](https://github.com/zachjs/sv2v), [nextpnr](https://github.com/YosysHQ/nextpnr), [IceStorm](https://github.com/YosysHQ/icestorm), [openFPGALoader](https://github.com/trabucayre/openFPGALoader), and more. Most of these tools do not provide updated binaries and expect you to compile them yourself. However, as of 2021 this overwhelming scavenger hunt has been made exponentially easier.
+If you want a fully open-source design flow, you will need to install nearly a dozen tools that each do different things. You will need [Icarus](https://github.com/steveicarus/iverilog), [Verilator](https://github.com/verilator/verilator), [GTKWave](https://github.com/gtkwave/gtkwave), [Yosys](https://github.com/YosysHQ/yosys), [Surelog](https://github.com/chipsalliance/Surelog), [sv2v](https://github.com/zachjs/sv2v), [nextpnr](https://github.com/YosysHQ/nextpnr), [IceStorm](https://github.com/YosysHQ/icestorm), [openFPGALoader](https://github.com/trabucayre/openFPGALoader), and more. Most of these tools do not provide updated binaries and expect you to compile them yourself. However, as of 2021 this overwhelming scavenger hunt has been made exponentially easier!
 
 [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build) is a project that releases updated binaries of all common open-source digital design tools in one TAR file.
 
@@ -145,6 +172,8 @@ This is how to curl a release from OSS:
 
 ```bash
 cd ~/Downloads
-curl -JOL https://github.com/YosysHQ/oss-cad-suite-build/releases/download/<YYYY-MM-DD>/oss-cad-suite-linux-x64-<YYYYMMDD>.tgz
-tar -xzvf oss-cad-suite-linux-x64-<YYYYMMDD>.tgz -C ~/Utils/
+curl -JOL https://github.com/YosysHQ/oss-cad-suite-build/releases/download/YYYY-MM-DD/oss-cad-suite-linux-x64-YYYYMMDD.tgz
+tar -xzvf oss-cad-suite-linux-x64-YYYYMMDD.tgz -C ~/Utils/
 ```
+
+Be sure to add the OSS CAD Suite `"bin"` directory to `PATH`.
