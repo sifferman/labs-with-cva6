@@ -37,8 +37,8 @@ These are the steps it takes in more detail:
 Note, out of simplicity's sake, there are a few important OS features that have not been fully implemented, such as:
 
 * The code does not implement trap handlers for `ecall` instructions.
-* The kernel and each user process should have its own page table.
-* User processes are usually loaded to addresses 0x0-0x7fffffff.
+* The kernel and each user process should have their own page table.
+* User processes are usually loaded to addresses starting at 0x0.
 
 In this lab, you will be implementing basic trap handlers.
 
@@ -103,7 +103,8 @@ CVA6 simulations create a log file: `"cva6/trace_hart_00.dasm"`. For every instr
 Notes:
 
 * *"Hart" means hardware thread, which is the same thing as a core.*
-* *Sometimes the core randomly enters Debug mode. As long as the core returns to normal execution, you can ignore this. If the simulation never exits, then your code has a bug.*
+* *Simulation time should take no longer than 1 mintue.*
+* *Sometimes the core randomly enters Debug mode. (Observe `TOP.ariane_testharness.i_ariane.i_cva6.debug_mode`). As long as the core returns to normal execution, you can ignore this. If the simulation never exits, then your code has a bug.*
 
 ### Lab Questions
 
