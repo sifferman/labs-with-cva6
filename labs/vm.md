@@ -85,11 +85,11 @@ The CVA6 testbench is currently configured that any `ecall` instruction will sto
 3. Load user program 1 to memory and configure the page table accordingly
 4. Run user program 1 that has an `ecall` instruction
 5. Return to the `s_trap` trap handler
-6. Have `s_trap` increment the user program counter, then return to the OS with `mret`
+6. Have `s_trap` increment the user program counter, then jump back to the OS
 7. Load user program 2 to a different VA and PA than user program 1, and configure the page table accordingly
 8. Run user program 2 that has an `ecall` instruction
 9. Return to the `s_trap` trap handler
-10. Have `s_trap` increment the user program counter, then return to the OS with `mret`
+10. Have `s_trap` increment the user program counter, then jump back to the OS
 11. On user program counter > 2, the OS runs `ecall`
 12. Return to the `m_trap` trap handler
 13. Have `m_trap` run `ecall` to exit the simulation
