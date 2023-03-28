@@ -59,7 +59,7 @@ You will need the [RISC-V Privileged Architecture Manual](https://github.com/ris
     1. Provide a diagram of a Sv39 PTE.
     2. List and define the 10 bottom bits of a Sv39 page table entry.
     3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 8 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
-6. Draw a diagram of the hierarchical page table created in the provided code.
+6. Draw a diagram of the hierarchical page table created in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) (unmodified).
 7. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide a screenshot of the bit diagram, and a definition of each of any fields that the provided programs use. (For example, [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) only uses the `SUM` from `sstatus`, so `SUM` is the only field you need to give a definition of for `sstatus`).
     1. `mstatus`
     2. `sstatus`
@@ -68,6 +68,7 @@ You will need the [RISC-V Privileged Architecture Manual](https://github.com/ris
     5. `mtvec`
     6. `stvec`
     7. `satp`
+    8. `medeleg`
 
 ## Lab
 
@@ -81,18 +82,19 @@ The CVA6 testbench is currently configured that any `ecall` instruction will sto
 
 0. *Same initial setup...*
 1. Create `m_trap` and `s_trap` trap handlers that are assigned to `mtvec` and `stvec`
-2. Create a counter that specifies which user program should be run (initialized to 1)
-3. Load user program 1 to memory and configure the page table accordingly
-4. Run user program 1 that has an `ecall` instruction
-5. Return to the `s_trap` trap handler
-6. Have `s_trap` increment the user program counter, then jump back to the OS
-7. Load user program 2 to a different VA and PA than user program 1, and configure the page table accordingly
-8. Run user program 2 that has an `ecall` instruction
-9. Return to the `s_trap` trap handler
-10. Have `s_trap` increment the user program counter, then jump back to the OS
-11. On user program counter > 2, the OS runs `ecall`
-12. Return to the `m_trap` trap handler
-13. Have `m_trap` run `ecall` to exit the simulation
+2. Set `medeleg`
+3. Create a counter that specifies which user program should be run (initialized to 1)
+4. Load user program 1 to memory and configure the page table accordingly
+5. Run user program 1 that has an `ecall` instruction
+6. Return to the `s_trap` trap handler
+7. Have `s_trap` increment the user program counter, then jump back to the OS
+8. Load user program 2 to a different VA and PA than user program 1, and configure the page table accordingly
+9. Run user program 2 that has an `ecall` instruction
+10. Return to the `s_trap` trap handler
+11. Have `s_trap` increment the user program counter, then jump back to the OS
+12. On user program counter > 2, the OS runs `ecall`
+13. Return to the `m_trap` trap handler
+14. Have `m_trap` run `ecall` to exit the simulation
 
 *Note: reference [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S) to help you set up your trap handlers.*
 
@@ -105,6 +107,12 @@ Notes:
 * *"Hart" means hardware thread, which is the same thing as a core.*
 * *Simulation time should take no longer than 1 mintue.*
 * *Sometimes the core randomly enters Debug mode. (Observe `TOP.ariane_testharness.i_ariane.i_cva6.debug_mode`). As long as the core returns to normal execution, you can ignore this. If the simulation never exits, then your code has a bug.*
+
+### Numerical Labels
+
+Note that [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/c5e49d3c7b3dd98ead3ae45898a29cbb437cf101/programs/vm/os.S#L95) demonstrates numerical labels with this line of code: `blt t0, t1, 1b;`.
+
+Numeric labels are used for local references. References to local labels are suffixed with `f` for a forward reference or `b` for a backwards reference ([reference](https://michaeljclark.github.io/asm.html)). They are most useful when creating loops or conditionals that don't need to be given a name, and don't need to called by another file.
 
 ### Lab Questions
 
@@ -121,4 +129,4 @@ Notes:
     8. Renter `OS` in S-mode
     9. Enter `m_trap` in M-mode
     10. Exit
-4. Provide a screenshot of a waveform demonstrating how the MMU translates the user program's virtual address to its physical address.
+4. Provide a screenshot of a waveform demonstrating how the MMU translates the user program's virtual address to its physical address. *Note: The net hierarchical path to the MMU is `TOP.ariane_testharness.i_ariane.i_cva6.ex_stage_i.lsu_i.gen_mmu_sv39.i_cva6_mmu`.*

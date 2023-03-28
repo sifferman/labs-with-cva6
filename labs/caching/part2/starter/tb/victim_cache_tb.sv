@@ -98,7 +98,7 @@ raddr_i = (ADDR_WIDTH)'(32'h2000);
 
 
 //\\ =========================== \\//
-$display( "End simulation.");
+$display("End simulation.");
 if (ERROR) $fatal();
 $stop;
 end
