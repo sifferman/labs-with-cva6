@@ -1,20 +1,19 @@
 CAPI=2:
-name: ucsbece154b:ooo:fifo:1.0.0
-description: UCSB ECE154B FIFO
+name: ucsbece154b:caching:victim_cache:1.0.0
+description: UCSB ECE154B Victim Cache
 
 filesets:
   # default
   rtl:
     files:
-      - ucsbece154b_fifo.sv
-      - lint.vlt: {file_type: vlt}
+      - ucsbece154b_victim_cache.sv
     file_type: systemVerilogSource
 
   # tb
   tb:
     files:
       - tb/assert.svh: {is_include_file: true}
-      - tb/fifo_tb.sv
+      - tb/victim_cache_tb.sv
     file_type: systemVerilogSource
 
 
@@ -23,10 +22,10 @@ targets:
     filesets:
       - rtl
 
-  tb: &tb # fusesoc run --target tb ucsbece154b:ooo:fifo
+  tb: # fusesoc run --target tb ucsbece154b:caching:victim_cache
     <<: *default
     description: Simulate the design
-    toplevel: fifo_tb
+    toplevel: victim_cache_tb
     default_tool: verilator
     filesets_append:
       - tb
@@ -43,22 +42,11 @@ targets:
         run_options:
           - +verilator+rand+reset+2
 
-  tb_resized_small: # fusesoc run --target tb_resized_small ucsbece154b:ooo:fifo
-    <<: *tb
-    parameters:
-      - DATA_WIDTH=13
-      - NR_ENTRIES=2
-
-  tb_resized_big: # fusesoc run --target tb_resized_big ucsbece154b:ooo:fifo
-    <<: *tb
-    parameters:
-      - DATA_WIDTH=51
-      - NR_ENTRIES=13
 
   lint: &lint
     <<: *default
     description: Lint the design
-    toplevel: ucsbece154b_fifo
+    toplevel: ucsbece154b_victim_cache
     default_tool: verilator
     tools:
       verilator:
@@ -70,25 +58,26 @@ targets:
           - --unroll-stmts 1000000
 
 
-  lint_resized_small: # fusesoc run --target lint_resized_small ucsbece154b:ooo:fifo
+  lint_1way: # fusesoc run --target lint_1way ucsbece154b:caching:victim_cache
     <<: *lint
     parameters:
-      - DATA_WIDTH=13
+      - NR_ENTRIES=1
+  lint_2way: # fusesoc run --target lint_2way ucsbece154b:caching:victim_cache
+    <<: *lint
+    parameters:
       - NR_ENTRIES=2
-  lint_resized_big: # fusesoc run --target lint_resized_big ucsbece154b:ooo:fifo
+  lint_4way: # fusesoc run --target lint_4way ucsbece154b:caching:victim_cache
     <<: *lint
     parameters:
-      - DATA_WIDTH=51
-      - NR_ENTRIES=13
-
+      - NR_ENTRIES=4
+  lint_16way: # fusesoc run --target lint_16way ucsbece154b:caching:victim_cache
+    <<: *lint
+    parameters:
+      - NR_ENTRIES=16
 
 
 parameters:
-  DATA_WIDTH:
-    datatype: int
-    description: Set fifo data width
-    paramtype: vlogparam
   NR_ENTRIES:
     datatype: int
-    description: Set fifo size
+    description: Set victim cache size
     paramtype: vlogparam

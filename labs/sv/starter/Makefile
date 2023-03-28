@@ -1,12 +1,12 @@
 #
 # File: Makefile
-# Description: Makefile for running the victim cache testbench.
+# Description: Makefile for running the fifo testbench.
 #
 
-CORE_FILE = victim_cache.core
+CORE_FILE = ucsbece154b_fifo.core
 VENDOR	= ucsbece154b
-LIBRARY	=
-CORE	= victim_cache
+LIBRARY	= sv
+CORE	= fifo
 VERSION	= 1.0.0
 PROJECT = ${VENDOR}:${LIBRARY}:${CORE}:${VERSION}
 
@@ -14,24 +14,29 @@ TESTS = $(shell find tests -type f)
 
 # ======================================================= #
 
-.PHONY: init build sim view lint clean
+.PHONY: init build sim view lint synth clean
 
 # ======================================================= #
 # Targets
 
-sim: fusesoc.conf
-	fusesoc run --target tb --tool ${TOOL} ucsbece154b::victim_cache
+tb: fusesoc.conf
+	fusesoc run --target $@ --tool ${TOOL} ${PROJECT}
+tb_resized_small: fusesoc.conf
+	fusesoc run --target $@ --tool ${TOOL} ${PROJECT}
+tb_resized_big: fusesoc.conf
+	fusesoc run --target $@ --tool ${TOOL} ${PROJECT}
 
 init: fusesoc.conf
 
-lint_1way: fusesoc.conf
+lint: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
-lint_2way: fusesoc.conf
+lint_resized_small: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
-lint_4way: fusesoc.conf
+lint_resized_big: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
-lint_16way: fusesoc.conf
-	fusesoc run --target $@ ${PROJECT}
+
+synth:
+	cd synth && make
 
 clean:
 	rm -rf build fusesoc.conf
@@ -40,7 +45,7 @@ clean:
 # Files
 
 fusesoc.conf: ${CORE_FILE}
-	pip3 install --user -r requirements.txt
+	@pip3 install --user -r requirements.txt > /dev/null
 	rm -f fusesoc.conf
 	fusesoc library add ${VENDOR}_${LIBRARY}_${CORE}_${VERSION} . --sync-type=local
 

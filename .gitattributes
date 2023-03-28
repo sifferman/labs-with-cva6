@@ -1,0 +1,13 @@
+
+# EOL
+*       text eol=lf
+
+# Language Corrections
+*.vh    linguist-language=Verilog
+*.svh   linguist-language=SystemVerilog
+*.vlt   linguist-language=SystemVerilog
+*.core  linguist-language=YAML
+*.drawio linguist-language=XML
+
+# Markdown
+*.md    linguist-documentation=false

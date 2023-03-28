@@ -62,7 +62,7 @@ end
 
 
 //\\ =========================== \\//
-$display( "End simulation.");
+$display("End simulation.");
 $stop;
 end
 

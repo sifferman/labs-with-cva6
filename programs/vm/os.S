@@ -3,18 +3,19 @@
  * Description: Example of how to enable virtual memory and load and run a user program.
  */
 
-#define USER_PA 0x80005000
-#define USER_VA 0x80001000
+#define USER_PA         (0x0000000080005000ULL)
+#define USER_VA         (0x0000000080001000ULL)
 
-#define KERNEL_PA 0x80000000
-#define PT2_PA 0x80002000
-#define PT1_PA 0x80003000
-#define PT0_PA 0x80004000
+#define KERNEL_PA       (0x0000000080000000ULL)
+#define PT2_PA          (0x0000000080002000ULL)
+#define PT1_PA          (0x0000000080003000ULL)
+#define PT0_PA          (0x0000000080004000ULL)
 
-#define PN(PA) (PA >> 12)
-#define PN0(PA) (PA >> 12 & 0x1ff)
-#define PN1(PA) (PA >> 21 & 0x1ff)
-#define PN2(PA) (PA >> 30 & 0x1ff)
+# Page Number Getters
+#define PN(PA)          (PA >> 12)
+#define PN0(PA)         (PA >> 12 & 0x1ff)
+#define PN1(PA)         (PA >> 21 & 0x1ff)
+#define PN2(PA)         (PA >> 30 & 0x1ff)
 
 .text
 .global _start;
