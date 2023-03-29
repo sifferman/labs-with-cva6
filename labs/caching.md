@@ -12,7 +12,7 @@ In this lab, you will add a victim cache to the [CVA6 I-Cache](https://github.co
     2. How many CPU clock cycles are needed to read from an SSD over NVMe? (Assume a total latency of 10&mu;s)
     3. How many CPU clock cycles are needed to read from an SSD over SATA? (Assume a total latency of 70&mu;s)
     4. How many CPU clock cycles are needed to read from an HDD over SATA? (Assume a total latency of 10ms)
-4. Caches are designed using SRAM. What are the pros and cons of using SRAM instead of DRAM or flip-flops for caches?
+4. Why are caches designed using SRAM? What are the pros and cons of the 3 most-common volatile storage elements: flip-flops, SRAM, and DRAM?
 5. Provided is a circuit diagram of an SRAM cell and SRAM array. (BL - Bit Line, WL - Word Line, Q - data) Use them to give a 1-sentence response for each of the following questions:
     [![SRAM Cell 6T](./caching/figures/SRAM_Cell_6T.svg)](https://en.wikipedia.org/wiki/Static_random-access_memory)
     [![SRAM Array](./caching/figures/SRAM_Array.png)](http://www.barth-dev.de/knowledge-corner/digital-design/memory-array-architectures/)
@@ -77,6 +77,8 @@ Notes:
 
 * "Hart" means hardware thread, which is the same thing as a core.*
 * Sometimes the core randomly enters Debug mode. (Observe `TOP.ariane_testharness.i_ariane.i_cva6.debug_mode`). As long as the core returns to normal execution, you can ignore this. If the simulation never exits, then your code has a bug.
+
+Additional resource: [RISC-V Instruction Encoder/Decoder](https://luplab.gitlab.io/rvcodecjs/).
 
 ### Part 2 Questions
 
