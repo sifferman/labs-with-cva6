@@ -41,11 +41,11 @@ Write a program that demonstrates the following situations:
 
 Note:
 
-* No more than 1 fixed latency unit operation (`ALU`, `CTRL_FLOW`, `CSR`, `MULT`) can be run simultaneously.
-* No more than 1 floating point unit operation (`FPU`, `FPU_VEC`) can be run simultaneously.
-* No more than 1 load-store unit operation (`LOAD`, `STORE`) can be run simultaneously.
-
-To enable out-of-order execution, your program must use a mix of instructions from the 3  functional unit types.
+* A dependency hazard exists only if the instructions are run out-of-order when the dependency is removed. Verify this when writing your RAW, WAW, and WAR hazards.
+* To enable out-of-order execution, your program must use a mix of instructions from the 3 functional unit types:
+    * No more than 1 fixed latency unit operation (`ALU`, `CTRL_FLOW`, `CSR`, `MULT`) can be run simultaneously.
+    * No more than 1 floating point unit operation (`FPU`, `FPU_VEC`) can be run simultaneously.
+    * No more than 1 load-store unit operation (`LOAD`, `STORE`) can be run simultaneously.
 
 An example of how to run RISC-V floating point instructions (RVF) is provided here: [`"fpu_example.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/rvf/fpu_example.S)
 
@@ -54,7 +54,7 @@ An example of how to run RISC-V floating point instructions (RVF) is provided he
 When providing screenshots of waveforms, please include all signals you decide are relevant to demonstrate the event. Improper justification will result in a lower score.
 
 1. Share your program. Be sure each situation is clearly commented.
-2. Provide a waveform screenshot and a brief explanation of how the issue queue is affected for each of the following situations:
+2. Provide a waveform screenshot and a brief explanation of **how the issue queue is affected** for each of the following situations:
     1. Out-of-Order Execution
     2. Read after Write hazard
     3. Write after Write hazard

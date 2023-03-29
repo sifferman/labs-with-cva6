@@ -54,12 +54,15 @@ You will need the [RISC-V Privileged Architecture Manual](https://github.com/ris
     2. The number of bits in a PA
     3. The number of layers a PT can be
     4. The size of a page in bytes
-    5. The size of a PTE
+    5. The size of a PTE in bytes
 5. Complete the following page table entry questions.
     1. Provide a diagram of a Sv39 PTE.
     2. List and define the 10 bottom bits of a Sv39 page table entry.
-    3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 8 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values.
+    3. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S), each PTE's bottom 8 bits are set to either `0x1`, `0xef`, or `0xff`; explain the purposes of each of these three values in the context of [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S).
 6. Draw a diagram of the hierarchical page table created in [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) (unmodified).
+    * Show/describe the contents of every valid PTE in each PT.
+    * Denote pointers from a PTE to another layer with an arrow to the corresponding PT.
+    * Show the contents of every valid physical frame in physical memory.
 7. In [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) and [`"programs/vm/privilege.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/privilege.S), several control/status registers are written. For each of the registers, provide a screenshot of the bit diagram, and a definition of each of any fields that the provided programs use. (For example, [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/vm/os.S) only uses the `SUM` from `sstatus`, so `SUM` is the only field you need to give a definition of for `sstatus`).
     1. `mstatus`
     2. `sstatus`
@@ -108,6 +111,8 @@ Notes:
 * *Simulation time should take no longer than 1 mintue.*
 * *Sometimes the core randomly enters Debug mode. (Observe `TOP.ariane_testharness.i_ariane.i_cva6.debug_mode`). As long as the core returns to normal execution, you can ignore this. If the simulation never exits, then your code has a bug.*
 
+Additional resource: [RISC-V Instruction Encoder/Decoder](https://luplab.gitlab.io/rvcodecjs/).
+
 ### Numerical Labels
 
 Note that [`"programs/vm/os.S"`](https://github.com/sifferman/labs-with-cva6/blob/c5e49d3c7b3dd98ead3ae45898a29cbb437cf101/programs/vm/os.S#L95) demonstrates numerical labels with this line of code: `blt t0, t1, 1b;`.
@@ -118,7 +123,11 @@ Numeric labels are used for local references. References to local labels are suf
 
 1. Show your modifications to `"rvfi_tracer.sv"`.
 2. Show your modifications to `"os.S"`.
-3. Provide your `"trace_hart_00.dasm"` file, and highlight the following behaviors:
+3. Draw a diagram of the hierarchical page table you created in your modified `"os.S"`.
+    * Show/describe the contents of every valid PTE in each PT.
+    * Denote pointers from a PTE to another layer with an arrow to the corresponding PT.
+    * Show the contents of every valid physical frame in physical memory.
+4. Provide your `"trace_hart_00.dasm"` file, and highlight the following behaviors:
     1. Enter `bootloader` in M-mode
     2. Enter `OS` in S-mode
     3. Enter user program 1 in U-mode; also provide its virtual and physical address
@@ -129,4 +138,4 @@ Numeric labels are used for local references. References to local labels are suf
     8. Renter `OS` in S-mode
     9. Enter `m_trap` in M-mode
     10. Exit
-4. Provide a screenshot of a waveform demonstrating how the MMU translates the user program's virtual address to its physical address. *Note: The net hierarchical path to the MMU is `TOP.ariane_testharness.i_ariane.i_cva6.ex_stage_i.lsu_i.gen_mmu_sv39.i_cva6_mmu`.*
+5. Provide a screenshot of a waveform demonstrating how the MMU translates the user program's virtual address to its physical address. *Note: The net hierarchical path to the MMU is `TOP.ariane_testharness.i_ariane.i_cva6.ex_stage_i.lsu_i.gen_mmu_sv39.i_cva6_mmu`.*
