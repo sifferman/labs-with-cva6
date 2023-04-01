@@ -1,5 +1,5 @@
 
-# Introduction to CVA6 Lab
+# Introduction to CVA6
 
 This lab will help you become acquainted with the CVA6 core. First, you will need to read through and follow along with the [Getting Started Guide](../guides/getting-started.md). If you are having difficulties with the tool setup, please first complete the questions that do not require any setup.
 
@@ -42,18 +42,18 @@ Next, refer to this guide as needed: [Creating a permanent link to a code snippe
 
 ## ELF Questions
 
-Note that you can view the contents of an ELF file with the following command: `riscv64-unknown-elf-objdump -d <PATH TO PROGRAM>.elf`
+Note that you can view the instructions and PCs of an ELF file with the following command: `riscv64-unknown-elf-objdump -d <PATH TO PROGRAM>.elf`
 
 1. What is an ELF file and where are they used? (Not specific to CVA6)
 2. What is the difference between segments and sections?
 3. Compile [`"./programs/examples/asm.S"`](https://github.com/sifferman/labs-with-cva6/blob/main/programs/examples/asm.S), and (using your favorite hex viewer) give the offset into the ELF file at which the `add` instruction is located. Please also provide a screenshot.
-4. Write a `.S` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file. (Provide only the `.S` file in your submission.)
+4. Write a `.S` file that contains instructions covering all 6 of the instruction formats, a branch taken condition, and a compressed instruction. Compile it to an ELF file and find all the PCs for each of the 8 occurences. Provide the `.S` file and the list of PCs.
 
 ## Simulation Questions
 
 Refer to the [Getting Started Guide](../guides/getting-started.md) if you need help setting up the required tools for simulation.
 
-All CVA6 hierarchical paths should start with "TOP.ariane_testharness.i_ariane.i_cva6.". Each module/struct should be separated with "." until you reach the delcaration of the net.
+All CVA6 net hierarchical paths should start with `TOP.ariane_testharness.i_ariane.i_cva6.`. Each module/struct should be separated with `.` until you reach the delcaration of the net. To see a net hierarchical path in GTKWave, you can right-click an added signal and click "Alias Highlighted Signal".
 
 When providing screenshots of waveforms, please include all signals you decide are relevant to demonstrate the event. Improper justification will result in a lower score.
 

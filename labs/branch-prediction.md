@@ -5,19 +5,17 @@ In this lab, you will need to modify the existing [branch predictor](https://git
 
 ## Pre-Lab Questions
 
-1. Define, compare, and contrast the following:
-    * Static branch prediction
-    * Dynamic branch prediction
-    * One-level branch prediction
-    * Two-level predictor
-    * Local branch prediction
-    * Global branch prediction
-2. Define BHT, BTB and RAS. What are they used for?
-3. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled?
-4. How is a branch resolution handled?
-5. What kind of dynamic branch predictor does CVA6 use?
-6. Provide a GitHub permalink to where in `ariane_pkg` the branch predictor structs are defined.
-7. When can more than 1 instruction be fetched per cycle?
+1. What is the purpose of a branch predictor? Why does a single-cycle core not need branch prediction?
+2. Define and compare and contrast the following:
+    * Static branch prediction vs. Dynamic branch prediction
+    * One-level branch prediction vs. Two-level predictor
+    * Local branch prediction vs. Global branch prediction
+3. Define BHT, BTB and RAS. What are they used for?
+4. Look at [frontend.sv](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv). What are the 4 types of instructions that the branch predictor handles, and how are they handled?
+5. How is a branch resolution handled?
+6. What kind of dynamic branch predictor does CVA6 use?
+7. Provide a GitHub permalink to where in `ariane_pkg` the branch predictor structs are defined.
+8. When can more than 1 instruction be fetched per cycle?
 
 ## Part 1 - CVA6 Predictor
 
@@ -29,7 +27,7 @@ To do this, you can create an `always_ff @(posedge clk)` block that counts how m
 
 1. Highlight your changes to `"frontend.sv"` that records the hit-rate.
 2. What are the final hit-rate percentages of each of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp)?
-3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for [`NR_ENTRIES`](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L419). Display the hit-rates in a table and explain your findings.
+3. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for [`NR_ENTRIES`](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L419). Display the 4 hit-rates in a table and explain how and why each program changes its hit-rate as BHT size changes. *Note: When changing `NR_ENTRIES`, be sure to change `NR_ENTRIES` in the `bht` instantiation in `"frontend.sv"`, not the `bht` declaration in `"bht.sv"`. Also your `NR_ENTRIES` values should be on the order of 16 to have interesting results.*
 
 ### Example of How to Write to a File in Verilog/SystemVerilog
 
@@ -63,7 +61,7 @@ A few notes on your implementation:
 1. Share your modified `"bht.sv"` that implements the global two-level adaptive branch predictor.
 2. What specifications did you decide on for your predictor? What is your BHT index generation algorithm? How wide is your GHR? Which address bits do you use for your address?
 3. Briefly explain your reasoning behind the BHT index generation algorithm you chose.
-4. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) for 3 different values of `NR_ENTRIES`. Display the hit-rates in a table and explain your findings.
+4. Compare the performance of the [bp benchmarks](https://github.com/sifferman/labs-with-cva6/tree/main/programs/bp) after choosing 3 new values for [`NR_ENTRIES`](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/core/frontend/frontend.sv#L419). Display the 4 hit-rates in a table and explain how and why each program changes its hit-rate as BHT size changes.
 
 ## Global Branch Predictor Specifications
 
@@ -77,11 +75,11 @@ For a global two-level adaptive branch predictor, the BHT index is calculated us
 
 ### 2-Bit Saturation Counter
 
-[![](./bp/2bc-fsm.svg)](https://docs.boom-core.org/en/latest/sections/branch-prediction/backing-predictor.html#the-two-bit-counter-tables)
+![2-Bit Saturation Counter](bp/saturation_counter.svg)
 
-### Gshare Predictor
+### Global Predictor
 
-[![](./bp/2bc-prediction.svg)](https://docs.boom-core.org/en/latest/sections/branch-prediction/backing-predictor.html#the-two-bit-counter-tables)
+![Global Predictor](bp/global_predictor.svg)
 
 ## Extra Credit
 
