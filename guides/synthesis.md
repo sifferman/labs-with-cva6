@@ -9,16 +9,22 @@ By following this guide, you will learn how to overcome the shortcomings of Veri
 
 ## Table of Contents
 
-* [DigitalJS Online](#digitaljs-online)
-* [Inference](#inference)
-* [Combinational Logic](#combinational-logic)
-* [Latches](#latches)
-* [Flip-Flops](#flip-flops)
-* [Memory](#memory)
-* [Clocks and Reset](#clocks-and-reset)
-* [Simulation Tools](#simulation-tools)
-* [Synthesis Tools](#synthesis-tools)
-* [OSS CAD Suite](#oss-cad-suite)
+- [Writing Synthesizable SystemVerilog](#writing-synthesizable-systemverilog)
+  - [Table of Contents](#table-of-contents)
+  - [DigitalJS Online](#digitaljs-online)
+  - [Inference](#inference)
+  - [Combinational Logic](#combinational-logic)
+  - [Latches](#latches)
+  - [Flip-Flops](#flip-flops)
+  - [Memory](#memory)
+  - [Clocks and Reset](#clocks-and-reset)
+  - [Simulation Tools](#simulation-tools)
+    - [Open Source Simulation Tools](#open-source-simulation-tools)
+    - [Proprietary Simulation Tools](#proprietary-simulation-tools)
+  - [Synthesis Tools](#synthesis-tools)
+    - [Open Source Synthesis Tools](#open-source-synthesis-tools)
+    - [Proprietary Synthesis Tools](#proprietary-synthesis-tools)
+  - [OSS CAD Suite](#oss-cad-suite)
 
 ## DigitalJS Online
 
@@ -82,9 +88,9 @@ end
 
 ## Flip-Flops
 
-A common practice is to split your flip-flops into `_d` and `_q` nets. This way, your code is oganized better because all your combinational logic is clearly done to your `_d` net in a `always_comb` block, and your `_q` nets are assigned in a `always_ff` block using reset and the `_d` nets. Plus, `always_ff` blocks do not allow for procedural assignment, so `always_comb` blocks are always better for combinational logic.
+A common practice is to split your flip-flops into `_d` and `_q` nets. This way, your code is organized better because all your combinational logic is clearly done to your `_d` net in an `always_comb` block, and your `_q` nets are assigned in a `always_ff` block using reset and the `_d` nets. Plus, `always_ff` blocks do not allow for procedural assignment, so `always_comb` blocks are always better for combinational logic.
 
-Another popular naming strategy is to use `<NAME>_next` and `<NAME>` instead of `<NAME>_d` and `<NAME>_q`. This is a personal preference. Most important is matching the coding style already introduced by the developers of the project you are working on.
+Another popular naming strategy is to use `<NAME>_next` and `<NAME>` instead of `<NAME>_d` and `<NAME>_q`. This is a personal preference, but it is crucial to match the coding style already introduced by the developers of the project. If it's your project, pick your favorite, and stick to it!
 
 Note: the following are infamously buggy in synthesis tools:
 
@@ -111,7 +117,7 @@ end
 
 ## Memory
 
-Memories in designs are common, and FPGAs often have built-in block RAMs (BRAMs) that you can use! Unfortunately, synthesis tools are usually really bad at inferring memories from a design, and will often incorrectly infer an array of DFFs. If you want a BRAM, then you should either use target-specific BRAM primitives ([SB_RAM40_4K](https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/MO/MemoryUsageGuideforiCE40Devices.ashx?document_id=47775), [RAMB36E1](https://docs.xilinx.com/r/en-US/ug953-vivado-7series-libraries/RAMB36E1), etc.) or write clear behavioral code that the tool developers allow for memory inference.
+Memories in designs are common, so FPGAs often have built-in block RAMs (BRAMs) that you can use. Unfortunately, synthesis tools are usually really bad at inferring memories from a design, and will often incorrectly infer an array of DFFs. If you want a BRAM, then you should either use target-specific BRAM primitives ([SB_RAM40_4K](https://www.latticesemi.com/-/media/LatticeSemi/Documents/ApplicationNotes/MO/MemoryUsageGuideforiCE40Devices.ashx?document_id=47775), [RAMB36E1](https://docs.xilinx.com/r/en-US/ug953-vivado-7series-libraries/RAMB36E1), etc.) or write clear behavioral code that the tool developers allow for memory inference.
 
 For a tool to have the greatest success of inferring a memory, you should structure your code like this:
 
@@ -131,24 +137,24 @@ end
 
 ## Clocks and Reset
 
-Clocks and reset nets are highly sensitive, global nets, and are often optimized better when they are only used in `always_ff` blocks and not `always_comb` blocks.
+Clocks and reset nets are highly sensitive global nets, and are often optimized better when they are only used in `always_ff` blocks and not `always_comb` blocks.
 
-When synthesizing your design, you often want to manually tell your synthesis software which nets are clocks and divided clocks. (Vivado example: [ucsbieee/mapache64 `"clk_constraints.xdc"`](https://github.com/ucsbieee/mapache64/blob/6ab8816c592a68c5168a956eed243ba345927583/hardware-level/rtl/top/synth/boards/cmod_a7/clk_constraints.xdc).)
+When synthesizing your design, you often want to manually tell your synthesis software which nets are clocks. (Vivado example: [ucsbieee/mapache64 `"clk_constraints.xdc"`](https://github.com/ucsbieee/mapache64/blob/6ab8816c592a68c5168a956eed243ba345927583/hardware-level/rtl/top/synth/boards/cmod_a7/clk_constraints.xdc).)
 
 ## Simulation Tools
 
 There are several Verilog Simulators to choose from, and each have pros and cons. Here is a quick summary of a few important ones:
 
-### Open Source
+### Open Source Simulation Tools
 
 * Icarus Verilog
     * Pros: Easy to use, good Verilog-2005 support
-    * Cons: Poor SystemVerilog support, slow for large designs
+    * Cons: Poor SystemVerilog support, slow for large designs, minimal error messages
 * Verilator
     * Pros: Fast, gives incredibly detailed warnings, great SystemVerilog/Verilog support
     * Cons: [Does not support unknown (X) values](https://github.com/verilator/verilator/issues/3645)
 
-### Proprietary
+### Proprietary Simulation Tools
 
 (All good, but all expensive)
 
@@ -158,9 +164,13 @@ There are several Verilog Simulators to choose from, and each have pros and cons
 
 ## Synthesis Tools
 
+### Open Source Synthesis Tools
+
 The only good open-source synthesis software is Yosys. Yosys is a buggy mess that has laughable SystemVerilog support, and is infamous for absolutely scrambling designs without giving any warnings. Therefore, it is CRUCIAL that you ensure your code is well-linted and follows all best-practices before using Yosys.
 
-The proprietary tool will depend on what your FPGA supports.
+### Proprietary Synthesis Tools
+
+The proprietary tool will depend on what your FPGA supports. Though [Vivado](https://www.xilinx.com/products/design-tools/vivado.html) is well-liked and offers free synthesis for most Xilinx FPGAs for free.
 
 ## OSS CAD Suite
 
