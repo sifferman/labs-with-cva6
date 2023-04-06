@@ -9,22 +9,17 @@ By following this guide, you will learn how to overcome the shortcomings of Veri
 
 ## Table of Contents
 
-- [Writing Synthesizable SystemVerilog](#writing-synthesizable-systemverilog)
-  - [Table of Contents](#table-of-contents)
-  - [DigitalJS Online](#digitaljs-online)
-  - [Inference](#inference)
-  - [Combinational Logic](#combinational-logic)
-  - [Latches](#latches)
-  - [Flip-Flops](#flip-flops)
-  - [Memory](#memory)
-  - [Clocks and Reset](#clocks-and-reset)
-  - [Simulation Tools](#simulation-tools)
-    - [Open Source Simulation Tools](#open-source-simulation-tools)
-    - [Proprietary Simulation Tools](#proprietary-simulation-tools)
-  - [Synthesis Tools](#synthesis-tools)
-    - [Open Source Synthesis Tools](#open-source-synthesis-tools)
-    - [Proprietary Synthesis Tools](#proprietary-synthesis-tools)
-  - [OSS CAD Suite](#oss-cad-suite)
+* [Table of Contents](#table-of-contents)
+* [DigitalJS Online](#digitaljs-online)
+* [Inference](#inference)
+* [Combinational Logic](#combinational-logic)
+* [Latches](#latches)
+* [Flip-Flops](#flip-flops)
+* [Memory](#memory)
+* [Clock and Reset](#clock-and-reset)
+* [Simulation Tools](#simulation-tools)
+* [Synthesis Tools](#synthesis-tools)
+* [OSS CAD Suite](#oss-cad-suite)
 
 ## DigitalJS Online
 
@@ -135,9 +130,9 @@ always_ff @(posedge clk_i) begin : mem_write
 end
 ```
 
-## Clocks and Reset
+## Clock and Reset
 
-Clocks and reset nets are highly sensitive global nets, and are often optimized better when they are only used in `always_ff` blocks and not `always_comb` blocks.
+Clock and reset nets hold highly sensitive global signals, and are better optimized when they are only used in `always_ff` blocks and not `always_comb` blocks.
 
 When synthesizing your design, you often want to manually tell your synthesis software which nets are clocks. (Vivado example: [ucsbieee/mapache64 `"clk_constraints.xdc"`](https://github.com/ucsbieee/mapache64/blob/6ab8816c592a68c5168a956eed243ba345927583/hardware-level/rtl/top/synth/boards/cmod_a7/clk_constraints.xdc).)
 
@@ -170,7 +165,7 @@ The only good open-source synthesis software is Yosys. Yosys is a buggy mess tha
 
 ### Proprietary Synthesis Tools
 
-The proprietary tool will depend on what your FPGA supports. Though [Vivado](https://www.xilinx.com/products/design-tools/vivado.html) is well-liked and offers free synthesis for most Xilinx FPGAs for free.
+The proprietary tool will depend on what your FPGA supports. Though [Vivado](https://www.xilinx.com/products/design-tools/vivado.html) is well-liked and offers free synthesis for most Xilinx FPGAs.
 
 ## OSS CAD Suite
 
