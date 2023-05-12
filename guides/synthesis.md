@@ -7,6 +7,8 @@ SystemVerilog and Verilog are overwhelmingly popular in digital design, but are 
 
 By following this guide, you will learn how to overcome the shortcomings of Verilog/SystemVerilog tools and write synthesizable code that meets your desired specifications.
 
+All code examples follow the [lowRISC Verilog Coding Style Specifications](https://github.com/lowRISC/style-guides/blob/master/VerilogCodingStyle.md).
+
 ## Table of Contents
 
 * [Table of Contents](#table-of-contents)
@@ -75,9 +77,10 @@ An unwanted latch is generated in an `always_comb` block when a net is not updat
 ```systemVerilog
 always_comb begin : y_latch
     y1_o = 0; // default value
-    if (en_i)
+    if (en_i) begin
         y0_o = x0_i; // latch (gives error)
         y1_o = x1_i; // no latch
+    end
 end
 ```
 
@@ -85,12 +88,12 @@ end
 
 A common practice is to split your flip-flops into `_d` and `_q` nets. This way, your code is organized better because all your combinational logic is clearly done to your `_d` net in an `always_comb` block, and your `_q` nets are assigned in a `always_ff` block using reset and the `_d` nets. Plus, `always_ff` blocks do not allow for procedural assignment, so `always_comb` blocks are always better for combinational logic.
 
-Another popular naming strategy is to use `<NAME>_next` and `<NAME>` instead of `<NAME>_d` and `<NAME>_q`. This is a personal preference, but it is crucial to match the coding style already introduced by the developers of the project. If it's your project, pick your favorite, and stick to it!
+Another popular naming strategy is to use `<NAME>_next` and `<NAME>_reg` instead of `<NAME>_d` and `<NAME>_q`. This is a personal preference, but it is crucial to match the coding style already introduced by the developers of the project. If it's your project, pick your favorite, and stick to it!
 
 Note: the following are infamously buggy in synthesis tools:
 
 * FF initial values (`initial data = 0;` or `logic data = 0;`). Instead, use a reset value for all FFs.
-* Non-clock/reset logic in `always_ff`. If you are following the `_d` and `_q` strategy, this should never happen.
+* Non-clock/reset logic in `always_ff`. If you are following the lowRISC naming style with `_d` and `_q`, this should never happen.
 
 To infer a flip-flop, you should structure your code like this:
 
