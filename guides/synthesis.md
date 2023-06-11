@@ -178,7 +178,7 @@ If you want a fully open-source design flow, you will need to install nearly a d
 
 This is how to curl a release from OSS:
 
-*Note: check the [latest release](https://github.com/YosysHQ/oss-cad-suite-build/releases/tag/latest) and edit the filenames in the script accordingly.*
+*Note: check the [latest release](https://github.com/YosysHQ/oss-cad-suite-build/releases/latest) and edit the filenames in the script accordingly.*
 
 ```bash
 cd ~/Downloads
