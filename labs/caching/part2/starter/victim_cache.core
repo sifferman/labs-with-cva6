@@ -6,6 +6,7 @@ filesets:
   # default
   rtl:
     files:
+      - unread.sv
       - ucsbece154b_victim_cache.sv
     file_type: systemVerilogSource
 
@@ -35,10 +36,10 @@ targets:
           - --binary
           - -j 0
           - --trace-fst
+          - --trace-structs
           - --x-assign unique
           - --x-initial unique
-          - --unroll-count 10000
-          - --unroll-stmts 1000000
+          - -Wno-fatal
         run_options:
           - +verilator+rand+reset+2
 
@@ -53,9 +54,8 @@ targets:
         mode: lint-only
         verilator_options:
           - -Wall
-          - --language 1800-2017
-          - --unroll-count 10000
-          - --unroll-stmts 1000000
+          - +1364-2005ext+v
+          - +1800-2012ext+sv
 
 
   lint_1way: # fusesoc run --target lint_1way ucsbece154b:caching:victim_cache

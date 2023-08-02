@@ -13,7 +13,7 @@ TESTS = $(shell find tests -type f)
 
 # ======================================================= #
 
-.PHONY: init build sim view lint clean
+.PHONY: init build sim lint_1way lint_2way lint_4way lint_16way synth clean
 
 # ======================================================= #
 # Targets
@@ -32,13 +32,16 @@ lint_4way: fusesoc.conf
 lint_16way: fusesoc.conf
 	fusesoc run --target $@ ${PROJECT}
 
+synth:
+	cd synth && make
+
 clean:
 	rm -rf build fusesoc.conf
 
 # ======================================================= #
 # Files
 
-fusesoc.conf: ${CORE_FILE}
+fusesoc.conf:
 	pip3 install --user -r requirements.txt
 	rm -f fusesoc.conf
 	fusesoc library add ${VENDOR}_${LIBRARY}_${CORE}_${VERSION} . --sync-type=local

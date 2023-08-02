@@ -37,13 +37,10 @@ localparam TAG_SIZE = 1; // TODO (in terms of ADDR_WIDTH and LINE_WIDTH)
 logic [TAG_SIZE-1:0] rtag, wtag;
 assign rtag = raddr_i[OFFSET_WIDTH +: TAG_SIZE]; // "indexed part-select" operator
 assign wtag = waddr_i[OFFSET_WIDTH +: TAG_SIZE];
+unread tag_unread (.d_i((|raddr_i[OFFSET_WIDTH-1:0])|(|waddr_i[OFFSET_WIDTH-1:0])));
 
 integer i = 0;
-
-
-/* verilator lint_off UNUSED */
-wire unused = (|i)|(|raddr_i[OFFSET_WIDTH-1:0])|(|waddr_i[OFFSET_WIDTH-1:0]);
-/* verilator lint_on UNUSED */
+unread i_unread (.d_i(|i));
 
 
 
@@ -97,7 +94,7 @@ struct packed {
     logic [LINE_WIDTH-1:0] data;
     logic [TAG_SIZE-1:0] tag;
     logic valid;
-} MEM_d[1:0], MEM_q[1:0];
+} MEM_d[2], MEM_q[2];
 
 // lru register
 logic lru_d, lru_q;
@@ -154,64 +151,74 @@ end else begin : lru_linked_list
 typedef logic [$clog2(NR_ENTRIES)-1:0] way_index_t;
 
 struct packed {
-    logic [LINE_WIDTH-1:0] data;
     logic [TAG_SIZE-1:0] tag;
     way_index_t lru; // less recently used
     way_index_t mru; // more recently used
     logic valid;
-} MEM_d[NR_ENTRIES-1:0], MEM_q[NR_ENTRIES-1:0];
+} dll_d[NR_ENTRIES], dll_q[NR_ENTRIES];
 
 // lru register
 way_index_t lru_d, lru_q, mru_d, mru_q;
 
-function void lru_bump(input way_index_t way);
-    // function to move way to MRU while maintaining DLL structure
-    MEM_d[MEM_d[way].mru].lru = '0; // TODO
-    MEM_d[MEM_d[way].lru].mru = '0; // TODO
-    lru_d = '0; // TODO
-    MEM_d[way].lru = '0; // TODO
-    MEM_d[mru_d].mru = '0; // TODO
-    mru_d = '0; // TODO
-endfunction
+// index to bump
+way_index_t read_index, write_index;
+
+
+// separate the data from the dll help with optimization
+logic [LINE_WIDTH-1:0] data_d[NR_ENTRIES], data_q[NR_ENTRIES];
+
 
 always_comb begin
     // combinational nets
     rdata_o = 'x;
     hit_o = 1'b0;
+    read_index = 'x;
+    write_index = 'x;
     // registers
     lru_d = lru_q;
     mru_d = mru_q;
-    MEM_d = MEM_q;
+    data_d = data_q;
+    dll_d = dll_q;
 
     // assign read port
     for (i = 0; i < NR_ENTRIES; i++) begin
-        if (en_i && MEM_d[i].valid && (rtag==MEM_d[i].tag)) begin
-            hit_o = '0; // TODO
-            rdata_o = '0; // TODO
-            lru_bump(way_index_t'(i));
+        if (en_i && dll_d[i].valid && (rtag==dll_d[i].tag)) begin
+            hit_o = 1'b1;
+            read_index = way_index_t'(i);
             break;
         end
     end
+    if (hit_o) begin
+        // read data
+        rdata_o = '0; // TODO
+
+        // bump read_index to mru
+        // TODO
+    end
     // handle write port
     if (en_i && we_i) begin
-        MEM_d[lru_d].data = '0; // TODO
-        MEM_d[lru_d].tag = '0; // TODO
-        MEM_d[lru_d].valid = '0; // TODO
-        lru_bump(lru_d);
+        write_index = lru_d;
+
+        // write data
+        // TODO
+
+        // bump write_index to mru
+        // TODO
     end
     // handle reset/flush/disable
     if (!rst_ni || flush_i || !en_i) begin
         for (i = 0; i < NR_ENTRIES; i++) begin
-            MEM_d[i].valid = 1'b0;
-            MEM_d[i].lru = way_index_t'(i-1);
-            MEM_d[i].mru = way_index_t'(i+1);
+            dll_d[i].valid = 1'b0;
+            dll_d[i].lru = way_index_t'(i-1);
+            dll_d[i].mru = way_index_t'(i+1);
         end
         lru_d = '0;
         mru_d = way_index_t'(NR_ENTRIES-1);
     end
 end
 always_ff @(posedge clk_i) begin
-    MEM_q <= MEM_d;
+    data_q <= data_d;
+    dll_q <= dll_d;
     lru_q <= lru_d;
     mru_q <= mru_d;
 end
