@@ -36,6 +36,7 @@ targets:
           - --binary
           - -j 0
           - --trace-fst
+          - --trace-structs
           - --x-assign unique
           - --x-initial unique
           - --unroll-count 10000
@@ -65,7 +66,8 @@ targets:
         mode: lint-only
         verilator_options:
           - -Wall
-          - --language 1800-2017
+          - +1364-2005ext+v
+          - +1800-2017ext+sv
           - --unroll-count 10000
           - --unroll-stmts 1000000
 
