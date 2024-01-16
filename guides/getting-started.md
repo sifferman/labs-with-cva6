@@ -3,7 +3,7 @@
 
 ## About CVA6
 
-From the [cva6 README](https://github.com/openhwgroup/cva6#readme):
+From the [cva6 README](https://github.com/openhwgroup/cva6/tree/b44a696bbead23dafb068037eff00a90689d4faf#readme):
 
 > CVA6 is a 6-stage, single issue, in-order CPU which implements the 64-bit RISC-V instruction set. It fully implements I, M, A and C extensions as specified in Volume I: User-Level ISA V 2.3 as well as the draft privilege extension 1.10. It implements three privilege levels M, S, U to fully support a Unix-like operating system. Furthermore it is compliant to the draft external debug spec 0.13.
 
@@ -24,7 +24,7 @@ All necessary tools have been installed to linux.engr.ucsb.edu. Therefore we rec
 ### Local Tool Setup
 
 1. Set `$RISCV` to wherever you want the tools to be installed to. i.e. run `RISCV=~/riscv-tools`
-2. Run [`./cva6/ci/setup.sh`](https://github.com/openhwgroup/cva6/blob/master/ci/setup.sh). (If you get an error, you may need to rerun parts of the script manually).
+2. Run [`./cva6/ci/setup.sh`](https://github.com/openhwgroup/cva6/blob/b44a696bbead23dafb068037eff00a90689d4faf/ci/setup.sh). (If you get an error, you may need to rerun parts of the script manually).
 3. Install the [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build). You can do this by un-taring the latest release to a `"~/Utils/oss-cad-suite"` directory.
 4. Add the following to your `"~/.bashrc"`, and replace the values of the 3 environment variables:
 
